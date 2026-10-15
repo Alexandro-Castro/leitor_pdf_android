@@ -31,7 +31,7 @@ Os PDFs abertos pelo botão **Abrir PDF** entram nos recentes. Os abertos por ou
 Não é preciso instalar nada no computador. Cada alteração no ramo `main` dispara o GitHub Actions (aba **Actions**), que compila o app e publica o APK em **Releases**.
 
 - `.github/workflows/gerar-apk.yml`: compila e publica o APK.
-- `.github/workflows/testar-emulador.yml`: instala o app em emuladores (Android 8 e Android 15), abre um PDF de exemplo, interage com ele e tira capturas de tela. Roda quando há envio para o ramo `teste`, ou manualmente na aba Actions.
+- `.github/workflows/testar-emulador.yml`: instala o app em emuladores (Android 8 e Android 15), abre um PDF de exemplo, interage com ele e tira capturas de tela. Roda quando há envio para o ramo `teste`, ou manualmente na aba Actions. As capturas e os registros ficam nos artefatos da execução e no ramo `resultados-teste`.
 
 Para compilar no computador, abra a pasta no Android Studio, ou rode `./gradlew assembleRelease`.
 
