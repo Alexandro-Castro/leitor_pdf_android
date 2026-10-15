@@ -118,9 +118,11 @@ public class PdfView extends View {
     private int corFundo = 0xFFDCD9D5;
 
     private final LruCache<Integer, Bitmap> cache;
+    private final Set<Integer> naCache = new HashSet<>(); // consultar sem mexer na ordem do cache
     private final Set<Integer> pendentes = new HashSet<>();
     private final Set<Integer> falhas = new HashSet<>();
     private List<Detalhe> detalhes = new ArrayList<>();
+    private boolean paginasReduzidas; // alguma página foi desenhada abaixo da resolução da tela
 
     private final Paint pintaBitmap = new Paint(Paint.FILTER_BITMAP_FLAG);
     private final Paint pintaPagina = new Paint();
@@ -188,6 +190,11 @@ public class PdfView extends View {
             @Override
             protected int sizeOf(Integer chave, Bitmap bitmap) {
                 return bitmap.getByteCount();
+            }
+
+            @Override
+            protected void entryRemoved(boolean expulso, Integer chave, Bitmap antigo, Bitmap novo) {
+                if (novo == null) naCache.remove(chave);
             }
         };
         if (depurar) {
@@ -516,6 +523,7 @@ public class PdfView extends View {
         pendentes.clear();
         falhas.clear();
         detalhes = new ArrayList<>();
+        paginasReduzidas = false;
         invalidate();
     }
 
@@ -551,6 +559,7 @@ public class PdfView extends View {
         pendentes.clear();
         falhas.clear();
         detalhes = new ArrayList<>();
+        paginasReduzidas = false;
         pedidoDetalheAtivo = ++pedidoDetalhe; // descarta recortes do layout antigo
         posX = limitar(posX, 0, maxPosX());
         invalidate();
@@ -692,21 +701,24 @@ public class PdfView extends View {
 
     /** Pede a renderização de uma página inteira na resolução da tela (zoom 1). */
     private void pedirPagina(final int i) {
-        if (i < 0 || i >= total || pendentes.contains(i) || falhas.contains(i) || cache.get(i) != null) {
+        if (i < 0 || i >= total || pendentes.contains(i) || falhas.contains(i) || naCache.contains(i)) {
             return;
         }
         pendentes.add(i);
 
         float largura = Math.max(1f, larguraPagina);
         float alturaPx = Math.max(1f, larguraPagina * proporcao[i]);
+        // Cada página cabe em 1/5 do cache: as visíveis e as vizinhas (pré-carregadas)
+        // ficam todas guardadas sem uma expulsar a outra.
         float fator = 1f;
-        long limiteBytes = cache.maxSize() / 3;
+        long limiteBytes = cache.maxSize() / 5;
         double bytes = (double) largura * alturaPx * 4;
         if (bytes > limiteBytes) fator = (float) Math.sqrt(limiteBytes / bytes);
         float maiorLado = Math.max(largura, alturaPx) * fator;
         if (maiorLado > LADO_MAX_BITMAP) fator *= LADO_MAX_BITMAP / maiorLado;
         final int w = Math.max(1, (int) (largura * fator));
         final int h = Math.max(1, (int) (alturaPx * fator));
+        if (fator < 0.999f) paginasReduzidas = true; // a nitidez vem dos recortes de detalhe
         final int g = geracao;
         final int lw = larguraLayout;
         final float lp = larguraPagina;
@@ -729,6 +741,7 @@ public class PdfView extends View {
                 }
                 pendentes.remove(i);
                 if (feito != null) {
+                    naCache.add(i);
                     cache.put(i, feito);
                     invalidate();
                 } else if (tentou) {
@@ -739,13 +752,14 @@ public class PdfView extends View {
     }
 
     /**
-     * Com zoom, a página inteira em resolução de tela fica borrada. Quando o usuário
-     * para de mexer, renderiza só a parte visível na resolução exata do zoom atual.
+     * Com zoom (ou quando a página inteira teve de ser reduzida para caber na memória,
+     * como na tela deitada), a página fica borrada. Quando o usuário para de mexer,
+     * renderiza só a parte visível na resolução exata da tela.
      */
     private void pedirDetalhes() {
         final int id = ++pedidoDetalhe;
         pedidoDetalheAtivo = id;
-        if (total == 0 || larguraLayout == 0 || zoom < 1.05f) {
+        if (total == 0 || larguraLayout == 0 || (zoom < 1.05f && !paginasReduzidas)) {
             if (!detalhes.isEmpty()) {
                 detalhes = new ArrayList<>();
                 invalidate();
