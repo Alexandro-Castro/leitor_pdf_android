@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Leitor PDF</string>
+    <string name="abrir_pdf">Abrir PDF</string>
+    <string name="recentes">Recentes</string>
+    <string name="sem_recentes">Os PDFs que você abrir pelo botão acima aparecem aqui, com a página onde você parou.</string>
+    <string name="documento">Documento.pdf</string>
+    <string name="selo">PDF</string>
+    <string name="agora">agora mesmo</string>
+    <string name="pagina_de">Página %1$d de %2$d</string>
+    <string name="rotulo_pagina">%1$d / %2$d</string>
+    <string name="voltar">Voltar</string>
+    <string name="abrir_outro">Abrir outro PDF</string>
+    <string name="ativar_noturno">Ativar modo noturno</string>
+    <string name="desativar_noturno">Desativar modo noturno</string>
+    <string name="ir_para_pagina">Ir para a página</string>
+    <string name="dica_pagina">Número de 1 a %1$d</string>
+    <string name="ir">Ir</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="pagina_invalida">Digite um número de 1 a %1$d</string>
+    <string name="remover_da_lista">Remover da lista?</string>
+    <string name="remover">Remover</string>
+    <string name="nao_abriu">Não foi possível abrir</string>
+    <string name="erro_senha">Este PDF é protegido por senha. Este leitor ainda não abre arquivos com senha.</string>
+    <string name="erro_acesso">Não foi possível ler o arquivo. Ele pode ter sido movido ou apagado.</string>
+    <string name="erro_leitura">Este arquivo está danificado ou não é um PDF.</string>
+    <string name="sem_seletor">Nenhum app de arquivos disponível para escolher o PDF.</string>
+</resources>

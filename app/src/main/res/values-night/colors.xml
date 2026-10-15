@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="marca">#FF8A7A</color>
+    <color name="sobre_marca">#2B0A06</color>
+    <color name="fundo">#141312</color>
+    <color name="superficie">#211F1D</color>
+    <color name="barra">#F5211F1D</color>
+    <color name="texto">#EDEAE6</color>
+    <color name="texto_secundario">#A39E98</color>
+    <color name="fundo_leitor">#2A2826</color>
+    <color name="pilula">#1FFFFFFF</color>
+    <color name="selo">#33FF8A7A</color>
+    <color name="trilho">#26FFFFFF</color>
+</resources>

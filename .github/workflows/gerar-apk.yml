@@ -1,0 +1,58 @@
+name: Gerar APK
+
+# Toda alteração no app que chega ao ramo main gera um APK novo e publica em "Releases".
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - 'build.gradle'
+      - 'settings.gradle'
+      - 'gradle.properties'
+      - 'gradle/**'
+      - 'assinatura/**'
+      - '.github/workflows/gerar-apk.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gerar-apk
+  cancel-in-progress: false
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+
+      - name: Compilar o APK
+        run: ./gradlew --no-daemon assembleRelease
+
+      - name: Preparar o arquivo
+        run: cp app/build/outputs/apk/release/app-release.apk LeitorPDF.apk
+
+      - name: Guardar o APK no build
+        uses: actions/upload-artifact@v4
+        with:
+          name: LeitorPDF
+          path: LeitorPDF.apk
+
+      - name: Publicar em Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh release create "v1.${{ github.run_number }}" LeitorPDF.apk \
+            --target "${{ github.sha }}" \
+            --title "Leitor PDF 1.${{ github.run_number }}" \
+            --notes "Baixe o LeitorPDF.apk abaixo e abra no celular para instalar ou atualizar. A atualização mantém seus recentes e as páginas salvas." \
+            --latest

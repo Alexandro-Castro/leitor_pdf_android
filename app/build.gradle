@@ -1,0 +1,51 @@
+plugins {
+    id 'com.android.application'
+}
+
+// No GitHub, cada build recebe um número maior que o anterior; é isso que permite
+// instalar uma versão nova por cima da antiga.
+def numeroBuild = (System.getenv('GITHUB_RUN_NUMBER') ?: '1') as int
+
+android {
+    namespace 'com.alexandro.leitorpdf'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.alexandro.leitorpdf'
+        minSdk 26
+        targetSdk 35
+        versionCode numeroBuild
+        versionName "1.${numeroBuild}"
+    }
+
+    // Assinatura fixa: todas as versões saem com a mesma chave, então o Android
+    // aceita instalar uma atualização por cima da anterior sem apagar nada.
+    signingConfigs {
+        pessoal {
+            storeFile rootProject.file('assinatura/leitor.jks')
+            storePassword 'leitorpdf'
+            keyAlias 'leitor'
+            keyPassword 'leitorpdf'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.pessoal
+        }
+        debug {
+            signingConfig signingConfigs.pessoal
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    lint {
+        abortOnError false
+        textReport true
+    }
+}
