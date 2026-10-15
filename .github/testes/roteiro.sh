@@ -26,7 +26,10 @@ toque_texto() {
 }
 toque_duplo() { adb shell "input tap $1 $2 & sleep 0.12; input tap $1 $2; wait"; }
 
+adb logcat -G 16M > /dev/null 2>&1
 adb logcat -c
+# não mostrar o aviso "tela cheia" do sistema, que cobriria as capturas
+adb shell settings put secure immersive_mode_confirmations confirmed
 adb install -r "$APK" || { echo "ERRO: não instalou"; exit 1; }
 
 TAM=$(adb shell wm size | tr -d '\r' | awk -F': ' '/size/ {print $2}' | tail -1)
@@ -82,6 +85,9 @@ echo "== 9. Paisagem e volta"
 adb shell settings put system accelerometer_rotation 0
 adb shell settings put system user_rotation 1
 tela 10_paisagem 4
+tela 10b_paisagem_depois 6
+adb shell input swipe $((H / 2)) $((W * 3 / 4)) $((H / 2)) $((W / 4)) 300
+tela 10c_paisagem_rolado 3
 adb shell settings put system user_rotation 0
 tela 11_retrato 4
 
@@ -116,6 +122,17 @@ if toque_id "$PKG:id/botao_abrir"; then
   fi
 fi
 
+echo "== 15. Tema escuro do sistema"
+adb shell cmd uimode night yes
+sleep 2
+adb shell am force-stop $PKG
+adb shell am start -W -n "$ATIV" > /dev/null
+tela 20_tema_escuro_inicio 3
+adb shell am start -W -a android.intent.action.VIEW -d "$ARQ" -t application/pdf -n "$ATIV" > /dev/null
+tela 21_tema_escuro_leitor 4
+adb shell cmd uimode night no
+
+adb logcat -d -v time -s LeitorPDF:V AndroidRuntime:E > "$OUT/registro_app.txt"
 adb logcat -d -b crash > "$OUT/travamentos.txt" 2> /dev/null
 adb logcat -d -v time | tail -n 4000 > "$OUT/logcat.txt"
 grep -E "AndroidRuntime|leitorpdf|PdfRenderer|FATAL" "$OUT/logcat.txt" > "$OUT/logcat_app.txt" || true

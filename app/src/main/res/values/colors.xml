@@ -12,4 +12,7 @@
     <color name="selo">#1FC0362C</color>
     <color name="trilho">#1A000000</color>
     <color name="icone_fundo">#C0362C</color>
+    <color name="barra_noturna">#F2181716</color>
+    <color name="texto_noturno">#E8E4DF</color>
+    <color name="pilula_noturna">#1FFFFFFF</color>
 </resources>

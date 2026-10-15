@@ -3,6 +3,7 @@ package com.alexandro.leitorpdf;
 import android.animation.ValueAnimator;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -16,7 +17,9 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.ParcelFileDescriptor;
+import android.os.SystemClock;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.LruCache;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -67,6 +70,10 @@ public class PdfView extends View {
     private static final float ZOOM_MAX = 5f;
     private static final float ZOOM_TOQUE_DUPLO = 2.5f;
     private static final int LADO_MAX_BITMAP = 4096;
+    private static final String TAG = "LeitorPDF";
+
+    /** Registros detalhados só na versão de teste (debug). */
+    private final boolean depurar;
 
     // ---------- Linha de renderização (campos usados só dentro de 'trabalho') ----------
     private final ExecutorService trabalho = Executors.newSingleThreadExecutor();
@@ -174,6 +181,7 @@ public class PdfView extends View {
     public PdfView(Context contexto, AttributeSet atributos) {
         super(contexto, atributos);
         margem = 6 * contexto.getResources().getDisplayMetrics().density;
+        depurar = (contexto.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
 
         int maxBytes = (int) Math.min(Runtime.getRuntime().maxMemory() / 4, Integer.MAX_VALUE);
         cache = new LruCache<Integer, Bitmap>(maxBytes) {
@@ -182,6 +190,10 @@ public class PdfView extends View {
                 return bitmap.getByteCount();
             }
         };
+        if (depurar) {
+            Log.d(TAG, "memória máx " + (Runtime.getRuntime().maxMemory() >> 20) + " MB, cache "
+                    + (maxBytes >> 20) + " MB");
+        }
 
         rolagem = new OverScroller(contexto);
 
@@ -347,12 +359,26 @@ public class PdfView extends View {
         return i + limitar(fracao, 0f, 0.999f);
     }
 
-    /** Página considerada "atual" (começando em 0). */
+    /**
+     * Página considerada "atual" (começando em 0): a que ocupa mais espaço na área
+     * visível entre as barras. No empate, vale a de cima. No fim do documento, a última.
+     */
     public int getPaginaAtual() {
         if (total == 0 || larguraLayout == 0) return (int) posicaoPendente;
         float max = maxPosY();
         if (max > minPosY() + 1 && posY >= max - 1) return total - 1; // chegou ao fim
-        return primeiraVisivelEm((posY + espacoTopo + 1) / zoom);
+        float yTopo = (posY + espacoTopo) / zoom;
+        float yBase = Math.max(yTopo + 1, (posY + getHeight() - espacoBase) / zoom);
+        int melhor = primeiraVisivelEm(yTopo);
+        float maiorParte = -1f;
+        for (int i = melhor; i < total && topo[i] < yBase; i++) {
+            float parte = Math.min(topo[i] + altura[i], yBase) - Math.max(topo[i], yTopo);
+            if (parte > maiorParte + 1f) {
+                maiorParte = parte;
+                melhor = i;
+            }
+        }
+        return melhor;
     }
 
     /** Vai para a página 'indice' (começando em 0). */
@@ -449,6 +475,7 @@ public class PdfView extends View {
         try {
             bitmap = Bitmap.createBitmap(largura, alturaPx, Bitmap.Config.ARGB_8888);
         } catch (OutOfMemoryError semMemoria) {
+            Log.w(TAG, "sem memória para " + largura + "x" + alturaPx);
             return null;
         }
         bitmap.eraseColor(Color.WHITE); // páginas sem fundo viriam transparentes
@@ -459,6 +486,7 @@ public class PdfView extends View {
             matriz.postTranslate(-desvioX, -desvioY);
             pagina.render(bitmap, null, matriz, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
         } catch (Exception e) {
+            Log.w(TAG, "falha ao desenhar a página " + (indice + 1), e);
             return null;
         }
         return bitmap;
@@ -504,6 +532,10 @@ public class PdfView extends View {
 
     private void fazerLayout() {
         larguraLayout = getWidth();
+        if (depurar) {
+            Log.d(TAG, "layout " + getWidth() + "x" + getHeight() + " insets " + insetEsquerdo
+                    + "/" + insetDireito);
+        }
         esquerdaPagina = insetEsquerdo + margem;
         larguraPagina = Math.max(1f, larguraLayout - insetEsquerdo - insetDireito - 2 * margem);
         topo = new float[total];
@@ -679,13 +711,22 @@ public class PdfView extends View {
         final int lw = larguraLayout;
         final float lp = larguraPagina;
 
+        if (depurar) Log.d(TAG, "pedido p" + (i + 1) + " " + w + "x" + h);
         executar(() -> {
             boolean util = g == geracaoAtiva
                     && i >= primeiraDesejada - 2 && i <= ultimaDesejada + 2;
+            long t0 = SystemClock.uptimeMillis();
             final Bitmap feito = util ? renderizar(i, w, h, w, 0, 0) : null;
             final boolean tentou = util;
+            if (depurar) {
+                Log.d(TAG, "p" + (i + 1) + (util ? (feito != null ? " pronta" : " FALHOU") : " pulada")
+                        + " em " + (SystemClock.uptimeMillis() - t0) + " ms");
+            }
             principal.post(() -> {
-                if (g != geracao || lw != larguraLayout || lp != larguraPagina) return;
+                if (g != geracao || lw != larguraLayout || lp != larguraPagina) {
+                    if (depurar) Log.d(TAG, "p" + (i + 1) + " descartada (layout mudou)");
+                    return;
+                }
                 pendentes.remove(i);
                 if (feito != null) {
                     cache.put(i, feito);

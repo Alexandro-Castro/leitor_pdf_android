@@ -6,6 +6,7 @@ import android.content.ActivityNotFoundException;
 import android.content.ClipData;
 import android.content.Intent;
 import android.content.UriPermission;
+import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -69,6 +70,7 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
     private TextView rotuloPagina;
     private TextView indicador;
     private ImageButton botaoNoturno;
+    private ImageButton[] botoesTopo;
     private SeekBar barraPaginas;
     private PdfView pdf;
 
@@ -117,6 +119,13 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
         super.onNewIntent(intent);
         setIntent(intent);
         tratarIntent(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // A lista pode ter mudado enquanto outra janela do app estava aberta.
+        if (inicio.getVisibility() == View.VISIBLE) atualizarRecentes();
     }
 
     @Override
@@ -201,6 +210,8 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
         barraBase = findViewById(R.id.barra_base);
         titulo = findViewById(R.id.titulo);
         botaoNoturno = findViewById(R.id.botao_noturno);
+        botoesTopo = new ImageButton[]{findViewById(R.id.botao_voltar),
+                findViewById(R.id.botao_abrir_outro), botaoNoturno};
         rotuloPagina = findViewById(R.id.rotulo_pagina);
         barraPaginas = findViewById(R.id.barra_paginas);
         indicador = findViewById(R.id.indicador);
@@ -457,6 +468,7 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
         leitor.setVisibility(View.GONE);
         inicio.setVisibility(View.VISIBLE);
         mostrarBarras(true, false);
+        atualizarIconesSistema();
         atualizarRecentes();
     }
 
@@ -464,6 +476,7 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
         inicio.setVisibility(View.GONE);
         leitor.setVisibility(View.VISIBLE);
         mostrarBarras(true, false);
+        atualizarIconesSistema();
     }
 
     private void atualizarRecentes() {
@@ -586,6 +599,44 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
         botaoNoturno.setImageResource(noturno ? R.drawable.ic_dia : R.drawable.ic_noturno);
         botaoNoturno.setContentDescription(getString(
                 noturno ? R.string.desativar_noturno : R.string.ativar_noturno));
+
+        // No modo noturno as barras do leitor também ficam escuras.
+        int fundoBarra = noturno ? getColor(R.color.barra_noturna) : getColor(R.color.barra);
+        int corTexto = noturno ? getColor(R.color.texto_noturno) : getColor(R.color.texto);
+        barraTopo.setBackgroundColor(fundoBarra);
+        barraBase.setBackgroundColor(fundoBarra);
+        titulo.setTextColor(corTexto);
+        rotuloPagina.setTextColor(corTexto);
+        rotuloPagina.setBackgroundResource(noturno ? R.drawable.fundo_pilula_noturna : R.drawable.fundo_pilula);
+        ColorStateList tinta = ColorStateList.valueOf(corTexto);
+        for (ImageButton b : botoesTopo) b.setImageTintList(tinta);
+        atualizarIconesSistema();
+    }
+
+    /** Ícones escuros nas barras do sistema quando o fundo atrás delas é claro. */
+    private boolean iconesEscuros() {
+        boolean lendo = leitor.getVisibility() == View.VISIBLE;
+        return temaClaro() && !(lendo && noturno);
+    }
+
+    @SuppressWarnings("deprecation")
+    private void atualizarIconesSistema() {
+        Window janela = getWindow();
+        boolean escuros = iconesEscuros();
+        if (Build.VERSION.SDK_INT < 29) {
+            janela.setNavigationBarColor(escuros ? 0xE6FFFFFF : 0xE6000000);
+        }
+        if (Build.VERSION.SDK_INT >= 30) {
+            WindowInsetsController controle = janela.getInsetsController();
+            if (controle != null) {
+                int claras = WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+                        | WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS;
+                controle.setSystemBarsAppearance(escuros ? claras : 0, claras);
+            }
+        } else {
+            boolean escondidas = leitor.getVisibility() == View.VISIBLE && !barrasVisiveis;
+            mostrarBarrasSistema(!escondidas);
+        }
     }
 
     private void manterTelaLigada() {
@@ -638,8 +689,6 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
         janela.setStatusBarColor(Color.TRANSPARENT);
         if (Build.VERSION.SDK_INT >= 29) {
             janela.setNavigationBarColor(Color.TRANSPARENT);
-        } else {
-            janela.setNavigationBarColor(temaClaro() ? 0xE6FFFFFF : 0xE6000000);
         }
         if (Build.VERSION.SDK_INT >= 28) {
             WindowManager.LayoutParams atributos = janela.getAttributes();
@@ -649,12 +698,6 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
         }
         if (Build.VERSION.SDK_INT >= 30) {
             janela.setDecorFitsSystemWindows(false);
-            WindowInsetsController controle = janela.getInsetsController();
-            if (controle != null) {
-                int claras = WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
-                        | WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS;
-                controle.setSystemBarsAppearance(temaClaro() ? claras : 0, claras);
-            }
         } else {
             janela.getDecorView().setSystemUiVisibility(flagsBase());
         }
@@ -665,7 +708,7 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
         int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
-        if (temaClaro()) {
+        if (iconesEscuros()) {
             flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
         }
         return flags;
