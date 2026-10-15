@@ -1,0 +1,85 @@
+--------- beginning of main
+--------- beginning of system
+10-15 23:22:23.455 D/LeitorPDF( 4333): memória máx 384 MB, cache 96 MB
+10-15 23:22:27.791 D/LeitorPDF( 4333): memória máx 384 MB, cache 96 MB
+10-15 23:22:28.360 D/LeitorPDF( 4333): layout 1080x2400 insets 0/0
+10-15 23:22:28.371 D/LeitorPDF( 4333): pedido p1 1048x1483
+10-15 23:22:28.371 D/LeitorPDF( 4333): pedido p2 1048x1483
+10-15 23:22:28.372 D/LeitorPDF( 4333): pedido p3 1048x1483
+10-15 23:22:28.518 D/LeitorPDF( 4333): p1 pronta em 88 ms
+10-15 23:22:28.592 D/LeitorPDF( 4333): p2 pronta em 72 ms
+10-15 23:22:28.603 D/LeitorPDF( 4333): p3 pronta em 11 ms
+10-15 23:22:33.571 D/LeitorPDF( 4333): pedido p4 1048x1483
+10-15 23:22:33.588 D/LeitorPDF( 4333): p4 pronta em 17 ms
+10-15 23:22:39.226 D/LeitorPDF( 4333): pedido p5 1048x1483
+10-15 23:22:39.247 D/LeitorPDF( 4333): p5 pronta em 18 ms
+10-15 23:22:52.531 D/LeitorPDF( 4333): pedido p8 1048x1483
+10-15 23:22:52.531 D/LeitorPDF( 4333): pedido p9 1048x1483
+10-15 23:22:52.531 D/LeitorPDF( 4333): pedido p10 1048x1483
+10-15 23:22:52.531 D/LeitorPDF( 4333): pedido p11 1048x740
+10-15 23:22:52.531 D/LeitorPDF( 4333): pedido p7 1048x1483
+10-15 23:22:52.554 D/LeitorPDF( 4333): p8 pronta em 21 ms
+10-15 23:22:52.591 D/LeitorPDF( 4333): p9 pronta em 37 ms
+10-15 23:22:52.608 D/LeitorPDF( 4333): p10 pronta em 17 ms
+10-15 23:22:52.632 D/LeitorPDF( 4333): p11 pronta em 23 ms
+10-15 23:22:52.652 D/LeitorPDF( 4333): p7 pronta em 20 ms
+10-15 23:22:56.129 D/LeitorPDF( 4333): layout 1080x2400 insets 0/126
+10-15 23:22:56.132 D/LeitorPDF( 4333): layout 2400x1080 insets 0/126
+10-15 23:22:56.140 D/LeitorPDF( 4333): pedido p8 1885x2668
+10-15 23:22:56.140 D/LeitorPDF( 4333): pedido p9 1885x2668
+10-15 23:22:56.140 D/LeitorPDF( 4333): pedido p10 1885x2668
+10-15 23:22:56.140 D/LeitorPDF( 4333): pedido p7 1885x2668
+10-15 23:22:56.196 D/LeitorPDF( 4333): p8 pronta em 56 ms
+10-15 23:22:56.246 D/LeitorPDF( 4333): p9 pronta em 50 ms
+10-15 23:22:56.298 D/LeitorPDF( 4333): p10 pronta em 50 ms
+10-15 23:22:56.340 D/LeitorPDF( 4333): p7 pronta em 42 ms
+10-15 23:23:10.332 D/LeitorPDF( 4333): layout 2400x1080 insets 0/0
+10-15 23:23:10.335 D/LeitorPDF( 4333): layout 1080x2400 insets 0/0
+10-15 23:23:10.395 D/LeitorPDF( 4333): pedido p8 1048x1483
+10-15 23:23:10.395 D/LeitorPDF( 4333): pedido p9 1048x1483
+10-15 23:23:10.395 D/LeitorPDF( 4333): pedido p10 1048x1483
+10-15 23:23:10.395 D/LeitorPDF( 4333): pedido p11 1048x740
+10-15 23:23:10.395 D/LeitorPDF( 4333): pedido p7 1048x1483
+10-15 23:23:10.418 D/LeitorPDF( 4333): p8 pronta em 21 ms
+10-15 23:23:10.436 D/LeitorPDF( 4333): p9 pronta em 18 ms
+10-15 23:23:10.451 D/LeitorPDF( 4333): p10 pronta em 11 ms
+10-15 23:23:10.455 D/LeitorPDF( 4333): p11 pronta em 4 ms
+10-15 23:23:10.487 D/LeitorPDF( 4333): p7 pronta em 31 ms
+10-15 23:23:18.790 D/LeitorPDF( 5130): memória máx 384 MB, cache 96 MB
+10-15 23:23:19.583 D/LeitorPDF( 5130): layout 1080x2400 insets 0/0
+10-15 23:23:19.617 D/LeitorPDF( 5130): pedido p8 1048x1483
+10-15 23:23:19.618 D/LeitorPDF( 5130): pedido p9 1048x1483
+10-15 23:23:19.618 D/LeitorPDF( 5130): pedido p10 1048x1483
+10-15 23:23:19.618 D/LeitorPDF( 5130): pedido p11 1048x740
+10-15 23:23:19.618 D/LeitorPDF( 5130): pedido p7 1048x1483
+10-15 23:23:19.685 D/LeitorPDF( 5130): p8 pronta em 64 ms
+10-15 23:23:19.718 D/LeitorPDF( 5130): p9 pronta em 33 ms
+10-15 23:23:19.741 D/LeitorPDF( 5130): p10 pronta em 23 ms
+10-15 23:23:19.745 D/LeitorPDF( 5130): p11 pronta em 4 ms
+10-15 23:23:19.754 D/LeitorPDF( 5130): p7 pronta em 9 ms
+10-15 23:23:26.757 D/LeitorPDF( 5130): memória máx 384 MB, cache 96 MB
+10-15 23:23:39.792 D/LeitorPDF( 5425): memória máx 384 MB, cache 96 MB
+10-15 23:23:43.823 D/LeitorPDF( 5425): memória máx 384 MB, cache 96 MB
+10-15 23:23:43.865 D/LeitorPDF( 5425): layout 1080x2400 insets 0/0
+10-15 23:23:43.874 D/LeitorPDF( 5425): pedido p8 1048x1483
+10-15 23:23:43.875 D/LeitorPDF( 5425): pedido p9 1048x1483
+10-15 23:23:43.875 D/LeitorPDF( 5425): pedido p10 1048x1483
+10-15 23:23:43.875 D/LeitorPDF( 5425): pedido p11 1048x740
+10-15 23:23:43.875 D/LeitorPDF( 5425): pedido p7 1048x1483
+10-15 23:23:43.894 D/LeitorPDF( 5425): p8 pronta em 19 ms
+10-15 23:23:43.905 D/LeitorPDF( 5425): p9 pronta em 11 ms
+10-15 23:23:43.915 D/LeitorPDF( 5425): p10 pronta em 9 ms
+10-15 23:23:43.921 D/LeitorPDF( 5425): p11 pronta em 6 ms
+10-15 23:23:43.933 D/LeitorPDF( 5425): p7 pronta em 12 ms
+10-15 23:23:48.626 D/LeitorPDF( 5425): memória máx 384 MB, cache 96 MB
+10-15 23:23:48.823 D/LeitorPDF( 5425): layout 1080x2400 insets 0/0
+10-15 23:23:48.935 D/LeitorPDF( 5425): pedido p8 1048x1483
+10-15 23:23:48.935 D/LeitorPDF( 5425): pedido p9 1048x1483
+10-15 23:23:48.935 D/LeitorPDF( 5425): pedido p10 1048x1483
+10-15 23:23:48.936 D/LeitorPDF( 5425): pedido p11 1048x740
+10-15 23:23:48.936 D/LeitorPDF( 5425): pedido p7 1048x1483
+10-15 23:23:48.958 D/LeitorPDF( 5425): p8 pronta em 23 ms
+10-15 23:23:48.987 D/LeitorPDF( 5425): p9 pronta em 29 ms
+10-15 23:23:49.014 D/LeitorPDF( 5425): p10 pronta em 27 ms
+10-15 23:23:49.029 D/LeitorPDF( 5425): p11 pronta em 15 ms
+10-15 23:23:49.070 D/LeitorPDF( 5425): p7 pronta em 40 ms
