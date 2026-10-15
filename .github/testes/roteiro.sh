@@ -30,7 +30,13 @@ adb logcat -G 16M > /dev/null 2>&1
 adb logcat -c
 # não mostrar o aviso "tela cheia" do sistema, que cobriria as capturas
 adb shell settings put secure immersive_mode_confirmations confirmed
-adb install -r "$APK" || { echo "ERRO: não instalou"; exit 1; }
+# o emulador às vezes ainda não está pronto para instalar logo depois de ligar
+instalado=""
+for tentativa in 1 2 3 4 5 6; do
+  if adb install -r "$APK" > "$OUT/instalacao.txt" 2>&1; then instalado=1; break; fi
+  echo "instalação falhou (tentativa $tentativa), tentando de novo"; sleep 15
+done
+[ -n "$instalado" ] || { echo "ERRO: não instalou"; cat "$OUT/instalacao.txt"; exit 1; }
 
 TAM=$(adb shell wm size | tr -d '\r' | awk -F': ' '/size/ {print $2}' | tail -1)
 W=${TAM%x*}; H=${TAM#*x}
