@@ -35,6 +35,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
+import android.view.ViewConfiguration;
 import android.view.View;
 import android.widget.OverScroller;
 import android.widget.Toast;
@@ -187,6 +188,10 @@ public class PdfView extends View {
     private boolean arrastandoSelecao;  // depois do toque longo, arrastar estende a seleção
     private int alcaArrastada;          // 0 nenhuma, 1 início, 2 fim
     private PointF ancora;              // ponta fixa da seleção (pontos da página)
+    private float origemX, origemY;     // onde foi o toque longo (tela)
+    private boolean saiuDaOrigem;       // o dedo já se afastou do toque longo
+    private float desvioAlcaX, desvioAlcaY; // da ponta do dedo até a ponta da seleção
+    private final int folgaToque;
     private boolean selecaoEmAndamento;
     private PointF[] selecaoPendente;   // último pedido que chegou durante outro
     private int idSelecao;
@@ -268,6 +273,7 @@ public class PdfView extends View {
         super(contexto, atributos);
         dp = contexto.getResources().getDisplayMetrics().density;
         margem = 6 * dp;
+        folgaToque = ViewConfiguration.get(contexto).getScaledTouchSlop();
         depurar = (contexto.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
 
         int maxBytes = (int) Math.min(Runtime.getRuntime().maxMemory() / 4, Integer.MAX_VALUE);
@@ -1423,6 +1429,9 @@ public class PdfView extends View {
         fecharMenuSelecao();
         selecao = null;
         ancora = pts;
+        origemX = sx;
+        origemY = sy;
+        saiuDaOrigem = false;
         arrastandoSelecao = true;
         performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
         pedirSelecao(i, pts, pts);
@@ -1688,24 +1697,44 @@ public class PdfView extends View {
         // Arrastar uma alça da seleção, ou o dedo logo depois do toque longo
         if (acao == MotionEvent.ACTION_DOWN && selecao != null) {
             alcaArrastada = alcaNoPonto(evento.getX(), evento.getY());
-            if (alcaArrastada != 0) {
+            float[] p = alcaArrastada != 0 ? pontasSelecao() : null;
+            if (p != null) {
                 fecharMenuSelecao();
-                float[] p = pontasSelecao();
                 PointF fixo = new PointF();
-                if (alcaArrastada == 2 && p != null) {
-                    pontoNaPagina(selecao.pagina, p[0] + 1, p[1] - 2 * dp, fixo);
-                } else if (p != null) {
-                    pontoNaPagina(selecao.pagina, p[2] - 1, p[3] - 2 * dp, fixo);
+                // a ponta arrastada segue o dedo mantendo a distância do primeiro toque,
+                // para a seleção não pular; a outra ponta fica parada
+                float pontaX, pontaY;
+                if (alcaArrastada == 2) {
+                    pontoNaPagina(selecao.pagina, p[0] + 1, p[1] - 3 * dp, fixo);
+                    pontaX = p[2] - 1;
+                    pontaY = p[3] - 3 * dp;
+                } else {
+                    pontoNaPagina(selecao.pagina, p[2] - 1, p[3] - 3 * dp, fixo);
+                    pontaX = p[0] + 1;
+                    pontaY = p[1] - 3 * dp;
                 }
+                desvioAlcaX = pontaX - evento.getX();
+                desvioAlcaY = pontaY - evento.getY();
                 ancora = fixo;
                 return true;
             }
+            alcaArrastada = 0;
         }
         if (alcaArrastada != 0 || (arrastandoSelecao && acao != MotionEvent.ACTION_DOWN)) {
-            if (acao == MotionEvent.ACTION_MOVE && selecao != null && ancora != null) {
+            boolean mexeu = acao == MotionEvent.ACTION_MOVE && selecao != null && ancora != null;
+            if (mexeu && alcaArrastada == 0 && !saiuDaOrigem) {
+                // depois do toque longo, só estende quando o dedo realmente se mover
+                saiuDaOrigem = Math.hypot(evento.getX() - origemX, evento.getY() - origemY) > folgaToque;
+                mexeu = saiuDaOrigem;
+            }
+            if (mexeu) {
                 PointF dedo = new PointF();
-                // o texto escolhido fica um pouco acima do dedo, para não ficar escondido
-                pontoNaPagina(selecao.pagina, evento.getX(), evento.getY() - 20 * dp, dedo);
+                if (alcaArrastada != 0) {
+                    pontoNaPagina(selecao.pagina, evento.getX() + desvioAlcaX,
+                            evento.getY() + desvioAlcaY, dedo);
+                } else {
+                    pontoNaPagina(selecao.pagina, evento.getX(), evento.getY(), dedo);
+                }
                 if (alcaArrastada == 1) {
                     pedirSelecao(selecao.pagina, dedo, ancora);
                 } else {
