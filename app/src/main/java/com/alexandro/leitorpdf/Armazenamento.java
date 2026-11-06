@@ -8,11 +8,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 /** Guarda as preferências, a página onde cada PDF parou e a lista de recentes. */
 final class Armazenamento {
+
+    /** Página marcada de um documento. */
+    static final class Marcador {
+        int pagina;
+        String nome;
+    }
 
     static final class Recente {
         String uri;
@@ -27,6 +34,12 @@ final class Armazenamento {
     private static final String NOTURNO = "noturno";
     private static final String RECENTES = "recentes";
     private static final String POSICAO = "pos:";
+    private static final String MARCADORES = "marc:";
+    static final String MODO_PAGINA = "modo_pagina";
+    static final String CORTAR_MARGENS = "cortar_margens";
+    static final String VOLUME = "virar_com_volume";
+    static final String TRAVAR_ROTACAO = "travar_rotacao";
+    private static final String ORIENTACAO = "orientacao_travada";
 
     private final SharedPreferences prefs;
 
@@ -40,6 +53,61 @@ final class Armazenamento {
 
     void setNoturno(boolean valor) {
         prefs.edit().putBoolean(NOTURNO, valor).apply();
+    }
+
+    boolean opcao(String nome) {
+        return prefs.getBoolean(nome, false);
+    }
+
+    void setOpcao(String nome, boolean valor) {
+        prefs.edit().putBoolean(nome, valor).apply();
+    }
+
+    /** Orientação guardada quando a rotação foi travada (constante de ActivityInfo). */
+    int orientacaoTravada(int padrao) {
+        return prefs.getInt(ORIENTACAO, padrao);
+    }
+
+    void setOrientacaoTravada(int orientacao) {
+        prefs.edit().putInt(ORIENTACAO, orientacao).apply();
+    }
+
+    /** Marcadores do documento, em ordem de página. */
+    List<Marcador> marcadores(String chave) {
+        List<Marcador> lista = new ArrayList<>();
+        try {
+            JSONArray arr = new JSONArray(prefs.getString(MARCADORES + chave, "[]"));
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject o = arr.getJSONObject(i);
+                Marcador m = new Marcador();
+                m.pagina = o.getInt("pagina");
+                m.nome = o.optString("nome", "");
+                lista.add(m);
+            }
+        } catch (JSONException e) {
+            // lista corrompida: começa do zero
+        }
+        Collections.sort(lista, (a, b) -> Integer.compare(a.pagina, b.pagina));
+        return lista;
+    }
+
+    void salvarMarcadores(String chave, List<Marcador> lista) {
+        JSONArray arr = new JSONArray();
+        try {
+            for (Marcador m : lista) {
+                JSONObject o = new JSONObject();
+                o.put("pagina", m.pagina);
+                o.put("nome", m.nome);
+                arr.put(o);
+            }
+        } catch (JSONException e) {
+            return;
+        }
+        if (lista.isEmpty()) {
+            prefs.edit().remove(MARCADORES + chave).apply();
+        } else {
+            prefs.edit().putString(MARCADORES + chave, arr.toString()).apply();
+        }
     }
 
     float posicao(String chave) {

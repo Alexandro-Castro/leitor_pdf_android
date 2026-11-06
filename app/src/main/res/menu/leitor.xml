@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_marcar"
+        android:title="@string/marcar_pagina" />
+    <item
+        android:id="@+id/menu_marcadores"
+        android:title="@string/marcadores" />
+    <item
+        android:id="@+id/menu_ir_para"
+        android:title="@string/ir_para_pagina_menu" />
+    <group android:id="@+id/grupo_opcoes">
+        <item
+            android:id="@+id/menu_modo_pagina"
+            android:checkable="true"
+            android:title="@string/modo_pagina" />
+        <item
+            android:id="@+id/menu_cortar"
+            android:checkable="true"
+            android:title="@string/cortar_margens" />
+        <item
+            android:id="@+id/menu_volume"
+            android:checkable="true"
+            android:title="@string/virar_com_volume" />
+        <item
+            android:id="@+id/menu_travar"
+            android:checkable="true"
+            android:title="@string/travar_rotacao" />
+    </group>
+    <item
+        android:id="@+id/menu_abrir_outro"
+        android:title="@string/abrir_outro" />
+</menu>

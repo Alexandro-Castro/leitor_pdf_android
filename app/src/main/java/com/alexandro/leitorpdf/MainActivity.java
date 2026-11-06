@@ -6,6 +6,7 @@ import android.content.ActivityNotFoundException;
 import android.content.ClipData;
 import android.content.Intent;
 import android.content.UriPermission;
+import android.content.pm.ActivityInfo;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -18,11 +19,15 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Parcelable;
 import android.provider.OpenableColumns;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.text.format.DateUtils;
 import android.view.DisplayCutout;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,25 +36,36 @@ import android.view.WindowInsets;
 import android.view.WindowInsetsController;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class MainActivity extends Activity implements PdfView.Ouvinte {
 
     private static final int PEDIDO_ABRIR = 1;
     private static final long TELA_LIGADA_MS = 5 * 60 * 1000L;
     private static final long INDICADOR_MS = 1200L;
+    private static final long ESPERA_BUSCA_MS = 400L;
+
+    /** Senhas digitadas nesta sessão (só na memória), para não perguntar de novo ao girar a tela. */
+    private static final Map<String, String> SENHAS = new HashMap<>();
 
     private Armazenamento armazenamento;
     private final Handler handler = new Handler(Looper.getMainLooper());
@@ -71,6 +87,15 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
     private TextView indicador;
     private ImageButton botaoNoturno;
     private ImageButton[] botoesTopo;
+    private ImageButton botaoBusca;
+    private View grupoNormal;
+    private View grupoBusca;
+    private EditText campoBusca;
+    private TextView contadorBusca;
+    private View camadaMiniaturas;
+    private View miniaturasBarra;
+    private GridView grade;
+    private Miniaturas miniaturas;
     private SeekBar barraPaginas;
     private PdfView pdf;
 
@@ -79,6 +104,8 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
     private String docNome;
     private String docChave;
     private boolean docExterno;     // veio de outro app ("Abrir com" / "Compartilhar")
+    private String senhaTentada;    // senha usada na última tentativa de abrir
+    private List<Armazenamento.Marcador> marcadores = new ArrayList<>();
 
     private boolean barrasVisiveis = true;
     private boolean arrastandoBarra;
@@ -87,6 +114,11 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
 
     private final Runnable apagarTela = () ->
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    private boolean buscaAgendada;
+    private final Runnable buscarAgora = () -> {
+        buscaAgendada = false;
+        pdf.buscar(campoBusca.getText().toString());
+    };
     private final Runnable esconderIndicador = () ->
             indicador.animate().alpha(0f).setDuration(250)
                     .withEndAction(() -> indicador.setVisibility(View.GONE));
@@ -104,6 +136,9 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
         configurarJanela();
         configurarEventos();
         aplicarNoturno();
+        pdf.setModoPagina(armazenamento.opcao(Armazenamento.MODO_PAGINA));
+        pdf.setCortarMargens(armazenamento.opcao(Armazenamento.CORTAR_MARGENS));
+        aplicarTravaRotacao();
 
         String uriSalva = estado != null ? estado.getString("uri") : null;
         if (uriSalva != null) {
@@ -154,7 +189,11 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
     @Override
     @SuppressWarnings("deprecation")
     public void onBackPressed() {
-        if (leitor.getVisibility() == View.VISIBLE) {
+        if (camadaMiniaturas.getVisibility() == View.VISIBLE) {
+            fecharMiniaturas();
+        } else if (grupoBusca.getVisibility() == View.VISIBLE) {
+            fecharBusca();
+        } else if (leitor.getVisibility() == View.VISIBLE) {
             fecharLeitor();
         } else {
             super.onBackPressed();
@@ -168,6 +207,30 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
         if (temFoco && leitor.getVisibility() == View.VISIBLE && !barrasVisiveis) {
             mostrarBarrasSistema(false);
         }
+    }
+
+    /** Com a opção ligada, volume para baixo avança e volume para cima volta. */
+    private boolean volumeViraPagina(int tecla) {
+        return (tecla == KeyEvent.KEYCODE_VOLUME_DOWN || tecla == KeyEvent.KEYCODE_VOLUME_UP)
+                && leitor.getVisibility() == View.VISIBLE
+                && camadaMiniaturas.getVisibility() != View.VISIBLE
+                && pdf.temDocumento()
+                && armazenamento.opcao(Armazenamento.VOLUME);
+    }
+
+    @Override
+    public boolean onKeyDown(int tecla, KeyEvent evento) {
+        if (volumeViraPagina(tecla)) {
+            pdf.avancar(tecla == KeyEvent.KEYCODE_VOLUME_DOWN ? 1 : -1);
+            return true;
+        }
+        return super.onKeyDown(tecla, evento);
+    }
+
+    @Override
+    public boolean onKeyUp(int tecla, KeyEvent evento) {
+        if (volumeViraPagina(tecla)) return true; // sem o som de volume
+        return super.onKeyUp(tecla, evento);
     }
 
     @Override
@@ -210,13 +273,24 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
         barraBase = findViewById(R.id.barra_base);
         titulo = findViewById(R.id.titulo);
         botaoNoturno = findViewById(R.id.botao_noturno);
-        botoesTopo = new ImageButton[]{findViewById(R.id.botao_voltar),
-                findViewById(R.id.botao_abrir_outro), botaoNoturno};
+        botaoBusca = findViewById(R.id.botao_busca);
+        grupoNormal = findViewById(R.id.grupo_normal);
+        grupoBusca = findViewById(R.id.grupo_busca);
+        campoBusca = findViewById(R.id.campo_busca);
+        contadorBusca = findViewById(R.id.contador_busca);
+        camadaMiniaturas = findViewById(R.id.miniaturas);
+        miniaturasBarra = findViewById(R.id.miniaturas_barra);
+        grade = findViewById(R.id.grade_miniaturas);
+        miniaturas = new Miniaturas(this, pdf, grade);
+        botoesTopo = new ImageButton[]{findViewById(R.id.botao_voltar), botaoBusca, botaoNoturno,
+                findViewById(R.id.botao_mais), findViewById(R.id.botao_fechar_busca),
+                findViewById(R.id.botao_anterior), findViewById(R.id.botao_proxima),
+                findViewById(R.id.botao_miniaturas)};
         rotuloPagina = findViewById(R.id.rotulo_pagina);
         barraPaginas = findViewById(R.id.barra_paginas);
         indicador = findViewById(R.id.indicador);
 
-        for (View v : new View[]{inicioBarra, inicioConteudo, barraTopo, barraBase}) {
+        for (View v : new View[]{inicioBarra, inicioConteudo, barraTopo, barraBase, miniaturasBarra, grade}) {
             paddingOriginal.put(v, new int[]{v.getPaddingLeft(), v.getPaddingTop(),
                     v.getPaddingRight(), v.getPaddingBottom()});
         }
@@ -226,8 +300,52 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
     private void configurarEventos() {
         pdf.setOuvinte(this);
         findViewById(R.id.botao_abrir).setOnClickListener(v -> abrirSeletor());
-        findViewById(R.id.botao_abrir_outro).setOnClickListener(v -> abrirSeletor());
         findViewById(R.id.botao_voltar).setOnClickListener(v -> fecharLeitor());
+        findViewById(R.id.botao_mais).setOnClickListener(this::mostrarMenu);
+        botaoBusca.setOnClickListener(v -> abrirBusca());
+        findViewById(R.id.botao_fechar_busca).setOnClickListener(v -> fecharBusca());
+        findViewById(R.id.botao_anterior).setOnClickListener(v -> pdf.proximaOcorrencia(-1));
+        findViewById(R.id.botao_proxima).setOnClickListener(v -> pdf.proximaOcorrencia(1));
+        findViewById(R.id.botao_miniaturas).setOnClickListener(v -> abrirMiniaturas());
+        findViewById(R.id.botao_fechar_miniaturas).setOnClickListener(v -> fecharMiniaturas());
+        grade.setOnItemClickListener((pai, v, posicao, id) -> {
+            fecharMiniaturas();
+            pdf.irParaPagina(posicao);
+        });
+        campoBusca.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence t, int inicio, int antes, int depois) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence t, int inicio, int antes, int depois) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable t) {
+                handler.removeCallbacks(buscarAgora);
+                buscaAgendada = false;
+                if (t.toString().trim().length() >= 2) {
+                    buscaAgendada = true;
+                    handler.postDelayed(buscarAgora, ESPERA_BUSCA_MS);
+                } else {
+                    pdf.limparBusca();
+                    contadorBusca.setText("");
+                }
+            }
+        });
+        campoBusca.setOnEditorActionListener((v, acao, evento) -> {
+            if (evento == null || evento.getAction() == KeyEvent.ACTION_DOWN) {
+                if (buscaAgendada) {
+                    handler.removeCallbacks(buscarAgora);
+                    buscarAgora.run();
+                } else {
+                    pdf.proximaOcorrencia(1);
+                }
+                esconderTeclado();
+            }
+            return true;
+        });
         botaoNoturno.setOnClickListener(v -> alternarNoturno());
         rotuloPagina.setOnClickListener(v -> perguntarPagina());
 
@@ -325,9 +443,21 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
         titulo.setText(docNome);
         rotuloPagina.setText("");
         barraPaginas.setVisibility(View.INVISIBLE);
+        fecharBusca();
+        botaoBusca.setVisibility(View.GONE);
+        miniaturas.esquecer();
+        marcadores = new ArrayList<>();
         mostrarLeitor();
         carregando.setVisibility(View.VISIBLE);
-        pdf.abrir(getContentResolver(), uri, getCacheDir(), posicao);
+        senhaTentada = SENHAS.get(uri.toString());
+        pdf.abrir(getContentResolver(), uri, getCacheDir(), posicao, senhaTentada);
+    }
+
+    /** Tenta abrir de novo o mesmo documento com a senha digitada. */
+    private void abrirComSenha(String senha) {
+        senhaTentada = senha;
+        carregando.setVisibility(View.VISIBLE);
+        pdf.abrir(getContentResolver(), docUri, getCacheDir(), armazenamento.posicao(docChave), senha);
     }
 
     /** Nome do arquivo e uma chave que identifica o mesmo PDF vindo de apps diferentes. */
@@ -393,8 +523,12 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
     // ======================= Avisos do PdfView =======================
 
     @Override
-    public void aoAbrir(int totalPaginas) {
+    public void aoAbrir(int totalPaginas, boolean temTexto) {
         carregando.setVisibility(View.GONE);
+        botaoBusca.setVisibility(temTexto ? View.VISIBLE : View.GONE);
+        if (senhaTentada != null && docUri != null) SENHAS.put(docUri.toString(), senhaTentada);
+        marcadores = armazenamento.marcadores(docChave);
+        atualizarMarcadas();
         barraPaginas.setMax(Math.max(0, totalPaginas - 1));
         barraPaginas.setVisibility(totalPaginas > 1 ? View.VISIBLE : View.INVISIBLE);
         int atual = pdf.getPaginaAtual();
@@ -412,6 +546,10 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
     public void aoFalhar(int motivo) {
         carregando.setVisibility(View.GONE);
         if (isFinishing() || isDestroyed()) return;
+        if (motivo == PdfView.FALHA_SENHA && Motor.temRecursosAvancados() && docUri != null) {
+            pedirSenha(senhaTentada != null);
+            return;
+        }
         if (docUri != null && armazenamento.removerRecente(docUri.toString())) {
             String uri = docUri.toString();
             docUri = null;
@@ -420,7 +558,7 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
         docChave = null;
         int mensagem;
         if (motivo == PdfView.FALHA_SENHA) {
-            mensagem = R.string.erro_senha;
+            mensagem = R.string.erro_senha_antigo;
         } else if (motivo == PdfView.FALHA_ACESSO) {
             mensagem = R.string.erro_acesso;
         } else {
@@ -453,7 +591,33 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
 
     @Override
     public void aoToque() {
+        if (grupoBusca.getVisibility() == View.VISIBLE) {
+            esconderTeclado(); // durante a busca, as barras ficam
+            return;
+        }
         mostrarBarras(!barrasVisiveis, true);
+    }
+
+    @Override
+    public void aoAbrirLink(Uri uri) {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, uri));
+        } catch (ActivityNotFoundException | SecurityException e) {
+            Toast.makeText(this, R.string.sem_app_link, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void aoProgressoBusca(int atual, int encontradas, boolean terminou) {
+        if (grupoBusca.getVisibility() != View.VISIBLE) return;
+        if (encontradas == 0) {
+            contadorBusca.setText(terminou
+                    ? (campoBusca.getText().toString().trim().length() >= 2 ? getString(R.string.nenhum_resultado) : "")
+                    : getString(R.string.buscando));
+        } else {
+            contadorBusca.setText(getString(terminou ? R.string.busca_contador : R.string.busca_parcial,
+                    Math.max(0, atual) + 1, encontradas));
+        }
     }
 
     // ======================= Telas =======================
@@ -462,6 +626,9 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
         docUri = null;
         docChave = null;
         docNome = null;
+        fecharBusca();
+        camadaMiniaturas.setVisibility(View.GONE);
+        miniaturas.esquecer();
         pdf.fechar();
         handler.removeCallbacks(apagarTela);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -607,6 +774,10 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
         barraBase.setBackgroundColor(fundoBarra);
         titulo.setTextColor(corTexto);
         rotuloPagina.setTextColor(corTexto);
+        campoBusca.setTextColor(corTexto);
+        int corSecundaria = noturno ? 0xFF9E9893 : getColor(R.color.texto_secundario);
+        campoBusca.setHintTextColor(corSecundaria);
+        contadorBusca.setTextColor(corSecundaria);
         rotuloPagina.setBackgroundResource(noturno ? R.drawable.fundo_pilula_noturna : R.drawable.fundo_pilula);
         ColorStateList tinta = ColorStateList.valueOf(corTexto);
         for (ImageButton b : botoesTopo) b.setImageTintList(tinta);
@@ -643,6 +814,252 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         handler.removeCallbacks(apagarTela);
         handler.postDelayed(apagarTela, TELA_LIGADA_MS);
+    }
+
+    // ======================= Busca =======================
+
+    private void abrirBusca() {
+        grupoNormal.setVisibility(View.GONE);
+        grupoBusca.setVisibility(View.VISIBLE);
+        contadorBusca.setText("");
+        campoBusca.requestFocus();
+        InputMethodManager teclado = getSystemService(InputMethodManager.class);
+        if (teclado != null) teclado.showSoftInput(campoBusca, InputMethodManager.SHOW_IMPLICIT);
+        String texto = campoBusca.getText().toString();
+        if (texto.trim().length() >= 2) pdf.buscar(texto);
+    }
+
+    private void fecharBusca() {
+        handler.removeCallbacks(buscarAgora);
+        buscaAgendada = false;
+        if (grupoBusca.getVisibility() != View.VISIBLE) return;
+        esconderTeclado();
+        grupoBusca.setVisibility(View.GONE);
+        grupoNormal.setVisibility(View.VISIBLE);
+        pdf.limparBusca();
+    }
+
+    private void esconderTeclado() {
+        InputMethodManager teclado = getSystemService(InputMethodManager.class);
+        if (teclado != null) teclado.hideSoftInputFromWindow(campoBusca.getWindowToken(), 0);
+        campoBusca.clearFocus();
+    }
+
+    // ======================= Menu e opções =======================
+
+    private void mostrarMenu(View ancora) {
+        PopupMenu menu = new PopupMenu(this, ancora);
+        menu.inflate(R.menu.leitor);
+        Menu m = menu.getMenu();
+        boolean marcada = marcadorDaPagina(pdf.getPaginaAtual()) != null;
+        m.findItem(R.id.menu_marcar).setTitle(marcada ? R.string.desmarcar_pagina : R.string.marcar_pagina);
+        m.findItem(R.id.menu_modo_pagina).setChecked(pdf.isModoPagina());
+        m.findItem(R.id.menu_cortar).setChecked(armazenamento.opcao(Armazenamento.CORTAR_MARGENS));
+        m.findItem(R.id.menu_volume).setChecked(armazenamento.opcao(Armazenamento.VOLUME));
+        m.findItem(R.id.menu_travar).setChecked(armazenamento.opcao(Armazenamento.TRAVAR_ROTACAO));
+        menu.setOnMenuItemClickListener(this::escolheuNoMenu);
+        menu.show();
+    }
+
+    private boolean escolheuNoMenu(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menu_marcar) {
+            alternarMarcador();
+        } else if (id == R.id.menu_marcadores) {
+            mostrarMarcadores();
+        } else if (id == R.id.menu_ir_para) {
+            perguntarPagina();
+        } else if (id == R.id.menu_modo_pagina) {
+            boolean ligado = !item.isChecked();
+            armazenamento.setOpcao(Armazenamento.MODO_PAGINA, ligado);
+            pdf.setModoPagina(ligado);
+        } else if (id == R.id.menu_cortar) {
+            boolean ligado = !item.isChecked();
+            armazenamento.setOpcao(Armazenamento.CORTAR_MARGENS, ligado);
+            pdf.setCortarMargens(ligado);
+        } else if (id == R.id.menu_volume) {
+            armazenamento.setOpcao(Armazenamento.VOLUME, !item.isChecked());
+        } else if (id == R.id.menu_travar) {
+            boolean ligado = !item.isChecked();
+            armazenamento.setOpcao(Armazenamento.TRAVAR_ROTACAO, ligado);
+            if (ligado) {
+                boolean deitada = getResources().getConfiguration().orientation
+                        == Configuration.ORIENTATION_LANDSCAPE;
+                armazenamento.setOrientacaoTravada(deitada
+                        ? ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+                        : ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+            }
+            aplicarTravaRotacao();
+        } else if (id == R.id.menu_abrir_outro) {
+            abrirSeletor();
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    private void aplicarTravaRotacao() {
+        if (armazenamento.opcao(Armazenamento.TRAVAR_ROTACAO)) {
+            setRequestedOrientation(armazenamento.orientacaoTravada(
+                    ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT));
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        }
+    }
+
+    // ======================= Marcadores =======================
+
+    private Armazenamento.Marcador marcadorDaPagina(int pagina) {
+        for (Armazenamento.Marcador m : marcadores) {
+            if (m.pagina == pagina) return m;
+        }
+        return null;
+    }
+
+    private void atualizarMarcadas() {
+        Set<Integer> paginas = new HashSet<>();
+        for (Armazenamento.Marcador m : marcadores) paginas.add(m.pagina);
+        pdf.setMarcadas(paginas);
+    }
+
+    private void alternarMarcador() {
+        if (docChave == null || !pdf.temDocumento()) return;
+        final int pagina = pdf.getPaginaAtual();
+        Armazenamento.Marcador existente = marcadorDaPagina(pagina);
+        if (existente != null) {
+            marcadores.remove(existente);
+            armazenamento.salvarMarcadores(docChave, marcadores);
+            atualizarMarcadas();
+            return;
+        }
+        final EditText campo = new EditText(this);
+        campo.setSingleLine(true);
+        campo.setText(getString(R.string.marcador_padrao, pagina + 1));
+        campo.selectAll();
+        FrameLayout moldura = new FrameLayout(this);
+        moldura.setPadding(dp(24), dp(8), dp(24), 0);
+        moldura.addView(campo, new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        AlertDialog dialogo = new AlertDialog.Builder(this)
+                .setTitle(R.string.nome_marcador)
+                .setView(moldura)
+                .setPositiveButton(R.string.salvar, (d, w) -> {
+                    Armazenamento.Marcador m = new Armazenamento.Marcador();
+                    m.pagina = pagina;
+                    String nome = campo.getText().toString().trim();
+                    m.nome = nome.isEmpty() ? getString(R.string.marcador_padrao, pagina + 1) : nome;
+                    marcadores.add(m);
+                    armazenamento.salvarMarcadores(docChave, marcadores);
+                    marcadores = armazenamento.marcadores(docChave);
+                    atualizarMarcadas();
+                })
+                .setNegativeButton(R.string.cancelar, null)
+                .create();
+        Window janela = dialogo.getWindow();
+        if (janela != null) janela.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        dialogo.show();
+        campo.requestFocus();
+    }
+
+    private void mostrarMarcadores() {
+        if (marcadores.isEmpty()) {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.marcadores)
+                    .setMessage(R.string.sem_marcadores)
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show();
+            return;
+        }
+        final List<Armazenamento.Marcador> lista = new ArrayList<>(marcadores);
+        List<String> rotulos = new ArrayList<>();
+        for (Armazenamento.Marcador m : lista) {
+            rotulos.add(getString(R.string.marcador_item, m.pagina + 1, m.nome));
+        }
+        final AlertDialog dialogo = new AlertDialog.Builder(this)
+                .setTitle(R.string.marcadores)
+                .setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, rotulos),
+                        (d, qual) -> pdf.irParaPagina(lista.get(qual).pagina))
+                .setNegativeButton(R.string.cancelar, null)
+                .create();
+        dialogo.setOnShowListener(d -> dialogo.getListView().setOnItemLongClickListener(
+                (pai, v, qual, id) -> {
+                    final Armazenamento.Marcador alvo = lista.get(qual);
+                    new AlertDialog.Builder(this)
+                            .setTitle(R.string.remover_marcador)
+                            .setMessage(rotulos.get(qual))
+                            .setPositiveButton(R.string.remover, (d2, w) -> {
+                                marcadores.remove(alvo);
+                                armazenamento.salvarMarcadores(docChave, marcadores);
+                                atualizarMarcadas();
+                                dialogo.dismiss();
+                            })
+                            .setNegativeButton(R.string.cancelar, null)
+                            .show();
+                    return true;
+                }));
+        dialogo.show();
+    }
+
+    // ======================= Senha =======================
+
+    private void pedirSenha(boolean errou) {
+        final EditText campo = new EditText(this);
+        campo.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        campo.setSingleLine(true);
+        campo.setHint(R.string.senha_dica);
+        FrameLayout moldura = new FrameLayout(this);
+        moldura.setPadding(dp(24), dp(8), dp(24), 0);
+        moldura.addView(campo, new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        final boolean externo = docExterno;
+        final boolean[] enviou = {false};
+        AlertDialog.Builder construtor = new AlertDialog.Builder(this)
+                .setTitle(R.string.senha_titulo)
+                .setView(moldura)
+                .setPositiveButton(R.string.abrir, (d, w) -> {
+                    enviou[0] = true;
+                    abrirComSenha(campo.getText().toString());
+                })
+                .setNegativeButton(R.string.cancelar, null);
+        if (errou) construtor.setMessage(R.string.senha_errada);
+        final AlertDialog dialogo = construtor.create();
+        dialogo.setOnDismissListener(d -> {
+            if (enviou[0]) return;
+            senhaTentada = null;
+            if (externo) {
+                finish();
+            } else {
+                mostrarInicio();
+            }
+        });
+        campo.setOnEditorActionListener((v, acao, evento) -> {
+            if (evento == null || evento.getAction() == KeyEvent.ACTION_DOWN) {
+                if (dialogo.isShowing()) {
+                    enviou[0] = true;
+                    dialogo.dismiss();
+                    abrirComSenha(campo.getText().toString());
+                }
+            }
+            return true;
+        });
+        Window janela = dialogo.getWindow();
+        if (janela != null) janela.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        dialogo.show();
+        campo.requestFocus();
+    }
+
+    // ======================= Miniaturas =======================
+
+    private void abrirMiniaturas() {
+        if (!pdf.temDocumento()) return;
+        miniaturas.mostrar(pdf.getTotalPaginas(), pdf.getPaginaAtual(), pdf.filtroNoturno());
+        camadaMiniaturas.setVisibility(View.VISIBLE);
+        mostrarBarrasSistema(true);
+    }
+
+    private void fecharMiniaturas() {
+        camadaMiniaturas.setVisibility(View.GONE);
+        if (!barrasVisiveis) mostrarBarrasSistema(false);
     }
 
     // ======================= Barras =======================
@@ -767,6 +1184,8 @@ public class MainActivity extends Activity implements PdfView.Ouvinte {
         somarPadding(inicioConteudo, esquerda, 0, direita, base);
         somarPadding(barraTopo, esquerda, topo, direita, 0);
         somarPadding(barraBase, esquerda, 0, direita, base);
+        somarPadding(miniaturasBarra, esquerda, topo, direita, 0);
+        somarPadding(grade, esquerda, 0, direita, base);
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) indicador.getLayoutParams();
         lp.bottomMargin = margemIndicador + base;
         indicador.setLayoutParams(lp);

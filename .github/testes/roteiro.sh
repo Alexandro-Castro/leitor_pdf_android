@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Teste no emulador: instala o app, abre um PDF de exemplo, mexe nele e tira capturas de tela.
+# Teste no emulador: instala o app, abre PDFs de exemplo, usa os recursos e tira capturas de tela.
 # As capturas e os registros ficam na pasta "resultado".
 set -u
 PKG=com.alexandro.leitorpdf
@@ -24,12 +24,21 @@ toque_texto() {
   local c; c=$(python3 "$ACHAR" "$OUT/ui.xml" texto "$1")
   if [ -n "$c" ]; then adb shell input tap $c; else echo "AVISO: não achei o texto $1"; return 1; fi
 }
+tem_texto() { despejar_ui; [ -n "$(python3 "$ACHAR" "$OUT/ui.xml" texto "$1")" ]; }
 toque_duplo() { adb shell "input tap $1 $2 & sleep 0.12; input tap $1 $2; wait"; }
+toque_longo() { adb shell input swipe "$1" "$2" "$1" "$2" 1200; }
+menu() { toque_id "$PKG:id/botao_mais" && sleep 1 && toque_texto "$1"; }
+ir_para_pagina() {
+  toque_id "$PKG:id/rotulo_pagina" && sleep 1
+  adb shell input text "$1"
+  adb shell input keyevent 66
+}
 
 adb logcat -G 16M > /dev/null 2>&1
 adb logcat -c
 # não mostrar o aviso "tela cheia" do sistema, que cobriria as capturas
 adb shell settings put secure immersive_mode_confirmations confirmed
+
 # o emulador às vezes ainda não está pronto para instalar logo depois de ligar
 instalado=""
 for tentativa in 1 2 3 4 5 6; do
@@ -41,15 +50,19 @@ done
 TAM=$(adb shell wm size | tr -d '\r' | awk -F': ' '/size/ {print $2}' | tail -1)
 W=${TAM%x*}; H=${TAM#*x}
 CX=$((W / 2)); CY=$((H / 2))
-echo "Tela: ${W}x${H}"
+DENS=$(adb shell wm density | tr -d '\r' | awk -F': ' '/density/ {print $2}' | tail -1)
+echo "Tela: ${W}x${H}, densidade $DENS"
 
-# PDF de exemplo na pasta Download (para o seletor) e na pasta do próprio app
+# PDFs de exemplo na pasta Download (para o seletor) e na pasta do próprio app
 adb push exemplo.pdf /sdcard/Download/exemplo.pdf > /dev/null
 adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE \
   -d file:///sdcard/Download/exemplo.pdf > /dev/null 2>&1
-adb push exemplo.pdf /data/local/tmp/exemplo.pdf > /dev/null
-adb shell "cat /data/local/tmp/exemplo.pdf | run-as $PKG sh -c 'mkdir -p files && cat > files/exemplo.pdf'"
+for f in exemplo.pdf exemplo_senha.pdf; do
+  adb push "$f" "/data/local/tmp/$f" > /dev/null
+  adb shell "cat /data/local/tmp/$f | run-as $PKG sh -c 'mkdir -p files && cat > files/$f'"
+done
 ARQ="file:///data/data/$PKG/files/exemplo.pdf"
+ARQ_SENHA="file:///data/data/$PKG/files/exemplo_senha.pdf"
 
 echo "== 1. Tela inicial"
 adb shell am start -W -n "$ATIV" > /dev/null
@@ -90,10 +103,7 @@ tela 09_pagina_9 3
 echo "== 9. Paisagem e volta"
 adb shell settings put system accelerometer_rotation 0
 adb shell settings put system user_rotation 1
-tela 10_paisagem 4
-tela 10b_paisagem_depois 6
-adb shell input swipe $((H / 2)) $((W * 3 / 4)) $((H / 2)) $((W / 4)) 300
-tela 10c_paisagem_rolado 3
+tela 10_paisagem 5
 adb shell settings put system user_rotation 0
 tela 11_retrato 4
 
@@ -123,19 +133,137 @@ if toque_id "$PKG:id/botao_abrir"; then
     tela 17_zoom 3
     toque_duplo $CX $CY
     tela 18_sem_zoom 2
-    adb shell input keyevent 4
-    tela 19_inicio_final 3
   fi
 fi
 
-echo "== 15. Tema escuro do sistema"
+# Daqui em diante, o documento precisa estar aberto no leitor
+if ! tem_texto "exemplo.pdf"; then
+  adb shell am start -W -a android.intent.action.VIEW -d "$ARQ" -t application/pdf -n "$ATIV" > /dev/null
+  sleep 4
+fi
+
+echo "== 15. Link interno (página 1 -> página 5)"
+ir_para_pagina 1
+sleep 2
+despejar_ui
+read -r BX1 BY1 BX2 BY2 <<< "$(python3 "$ACHAR" "$OUT/ui.xml" limites "$PKG:id/barra_topo")"
+# página 1 começa logo abaixo da barra: y = base da barra + margem (6dp) + pontos * escala
+ESC=$(python3 -c "d=$DENS/160; m=6*d; print(($W-2*m)/595)")
+Y_INTERNO=$(python3 -c "d=$DENS/160; print(int($BY2 + 6*d + 270*$ESC))")
+Y_EXTERNO=$(python3 -c "d=$DENS/160; print(int($BY2 + 6*d + 350*$ESC))")
+tela 20_pagina_1 1
+adb shell input tap $CX "$Y_INTERNO"
+tela 21_link_interno 3
+
+echo "== 16. Link externo"
+ir_para_pagina 1
+sleep 2
+adb shell input tap $CX "$Y_EXTERNO"
+tela 22_link_externo 4
+adb shell input keyevent 4
+sleep 2
+if ! tem_texto "exemplo.pdf"; then
+  adb shell am start -W -a android.intent.action.VIEW -d "$ARQ" -t application/pdf -n "$ATIV" > /dev/null
+  sleep 4
+fi
+
+echo "== 17. Busca"
+if toque_id "$PKG:id/botao_busca"; then
+  sleep 1
+  adb shell input text rainha
+  tela 23_busca 5
+  toque_id "$PKG:id/botao_proxima"
+  tela 24_busca_proxima 2
+  toque_id "$PKG:id/botao_fechar_busca"
+  sleep 1
+else
+  echo "(sem busca neste Android)"
+fi
+
+echo "== 18. Seleção de texto (toque longo)"
+ir_para_pagina 2
+sleep 2
+selecionou=""
+for dy in 0 14 28 42 56 70; do
+  toque_longo $((W * 3 / 10)) $((H / 2 + dy))
+  sleep 2
+  if tem_texto "Copy" || tem_texto "Copiar"; then selecionou=1; break; fi
+done
+tela 25_selecao 0.5
+if [ -n "$selecionou" ]; then
+  toque_texto "Copy" || toque_texto "Copiar"
+  tela 26_copiado 1
+else
+  echo "(nenhuma seleção)"
+  adb shell input tap $CX $CY
+  sleep 1
+  adb shell input tap $CX $CY
+fi
+
+echo "== 19. Menu e cortar margens"
+toque_id "$PKG:id/botao_mais"
+tela 27_menu 1.5
+toque_texto "Cortar margens"
+tela 28_margens_cortadas 4
+
+echo "== 20. Modo página por página"
+menu "Página por página"
+tela 29_modo_pagina 4
+adb shell input swipe $((W * 4 / 5)) $CY $((W / 5)) $CY 150
+tela 30_deslizou 3
+adb shell input tap $((W * 9 / 10)) $CY
+tela 31_toque_borda 3
+
+echo "== 21. Marcador"
+menu "Marcar esta página"
+sleep 1.5
+toque_id "android:id/button1"
+tela 32_marcada 2
+menu "Marcadores"
+tela 33_lista_marcadores 1.5
+adb shell input keyevent 4
+sleep 1
+
+echo "== 22. Miniaturas"
+toque_id "$PKG:id/botao_miniaturas"
+tela 34_miniaturas 4
+toque_texto "3"
+tela 35_foi_para_3 3
+
+echo "== 23. Virar com o volume"
+menu "Virar página com volume"
+sleep 1
+adb shell input keyevent 25
+tela 36_volume 3
+
+echo "== 24. Volta às opções normais"
+menu "Página por página"
+sleep 1
+menu "Cortar margens"
+sleep 1
+menu "Virar página com volume"
+sleep 1
+adb shell input keyevent 4
+
+echo "== 25. PDF com senha"
+adb shell am force-stop $PKG
+adb shell am start -W -a android.intent.action.VIEW -d "$ARQ_SENHA" -t application/pdf -n "$ATIV" > /dev/null
+tela 37_senha 4
+adb shell input text 9999
+adb shell input keyevent 66
+tela 38_senha_errada 4
+adb shell input text 1234
+adb shell input keyevent 66
+tela 39_senha_certa 4
+
+echo "== 26. Tema escuro do sistema"
 adb shell cmd uimode night yes
 sleep 2
 adb shell am force-stop $PKG
 adb shell am start -W -n "$ATIV" > /dev/null
-tela 20_tema_escuro_inicio 3
+tela 40_tema_escuro_inicio 3
 adb shell am start -W -a android.intent.action.VIEW -d "$ARQ" -t application/pdf -n "$ATIV" > /dev/null
-tela 21_tema_escuro_leitor 4
+tela 41_tema_escuro_leitor 4
 adb shell cmd uimode night no
 
 adb logcat -d -v time -s LeitorPDF:V AndroidRuntime:E > "$OUT/registro_app.txt"

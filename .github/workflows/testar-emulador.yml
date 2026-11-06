@@ -1,6 +1,6 @@
 name: Testar no emulador
 
-# Roda o app em emuladores (Android 8 e Android 15), tira capturas de tela e guarda os
+# Roda o app em emuladores (Android 8, 14 e 15), tira capturas de tela e guarda os
 # registros. Dispara ao enviar para o ramo "teste" ou manualmente na aba Actions.
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api: [26, 35]
+        api: [26, 34, 35]
     steps:
       - uses: actions/checkout@v5
 
@@ -43,8 +43,12 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
-      - name: PDF de exemplo
-        run: python3 .github/testes/gerar_pdf.py exemplo.pdf
+      - name: PDFs de exemplo
+        run: |
+          python3 .github/testes/gerar_pdf.py exemplo.pdf
+          python3 -m venv "$RUNNER_TEMP/venv"
+          "$RUNNER_TEMP/venv/bin/pip" install --quiet pikepdf
+          "$RUNNER_TEMP/venv/bin/python" .github/testes/cifrar_pdf.py exemplo.pdf exemplo_senha.pdf
 
       - name: Rodar no emulador
         uses: reactivecircus/android-emulator-runner@v2
