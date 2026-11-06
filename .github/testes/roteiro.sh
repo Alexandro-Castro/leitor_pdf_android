@@ -25,6 +25,7 @@ toque_texto() {
   if [ -n "$c" ]; then adb shell input tap $c; else echo "AVISO: não achei o texto $1"; return 1; fi
 }
 tem_texto() { despejar_ui; [ -n "$(python3 "$ACHAR" "$OUT/ui.xml" texto "$1")" ]; }
+no_leitor() { despejar_ui; [ -n "$(python3 "$ACHAR" "$OUT/ui.xml" id "$PKG:id/titulo")" ]; }
 toque_duplo() { adb shell "input tap $1 $2 & sleep 0.12; input tap $1 $2; wait"; }
 toque_longo() { adb shell input swipe "$1" "$2" "$1" "$2" 1200; }
 menu() { toque_id "$PKG:id/botao_mais" && sleep 1 && toque_texto "$1"; }
@@ -137,7 +138,7 @@ if toque_id "$PKG:id/botao_abrir"; then
 fi
 
 # Daqui em diante, o documento precisa estar aberto no leitor
-if ! tem_texto "exemplo.pdf"; then
+if ! no_leitor; then
   adb shell am start -W -a android.intent.action.VIEW -d "$ARQ" -t application/pdf -n "$ATIV" > /dev/null
   sleep 4
 fi
@@ -162,7 +163,7 @@ adb shell input tap $CX "$Y_EXTERNO"
 tela 22_link_externo 4
 adb shell input keyevent 4
 sleep 2
-if ! tem_texto "exemplo.pdf"; then
+if ! no_leitor; then
   adb shell am start -W -a android.intent.action.VIEW -d "$ARQ" -t application/pdf -n "$ATIV" > /dev/null
   sleep 4
 fi

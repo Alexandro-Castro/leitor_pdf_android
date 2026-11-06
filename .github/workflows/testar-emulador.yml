@@ -10,6 +10,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: testar-emulador
+  cancel-in-progress: true
+
 jobs:
   emulador:
     runs-on: ubuntu-latest

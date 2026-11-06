@@ -1705,8 +1705,10 @@ public class PdfView extends View {
                     pedirSelecao(selecao.pagina, ancora, dedo);
                 }
             } else if (acao == MotionEvent.ACTION_UP || acao == MotionEvent.ACTION_CANCEL) {
+                tocando = false;
                 arrastandoSelecao = false;
                 alcaArrastada = 0;
+                agendarAssentar();
                 if (!selecaoEmAndamento && selecao != null) mostrarMenuSelecao();
             }
             if (arrastandoSelecao) gestos.onTouchEvent(evento); // deixa o detector terminar o gesto
