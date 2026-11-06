@@ -306,6 +306,7 @@
             android:layout_height="match_parent"
             android:background="@color/fundo"
             android:clickable="true"
+            android:elevation="8dp"
             android:orientation="vertical"
             android:visibility="gone">
 

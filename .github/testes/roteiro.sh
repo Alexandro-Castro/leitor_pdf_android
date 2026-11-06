@@ -28,8 +28,11 @@ tem_texto() { despejar_ui; [ -n "$(python3 "$ACHAR" "$OUT/ui.xml" texto "$1")" ]
 no_leitor() { despejar_ui; [ -n "$(python3 "$ACHAR" "$OUT/ui.xml" id "$PKG:id/titulo")" ]; }
 toque_duplo() { adb shell "input tap $1 $2 & sleep 0.12; input tap $1 $2; wait"; }
 toque_longo() { adb shell input swipe "$1" "$2" "$1" "$2" 1200; }
-menu() { toque_id "$PKG:id/botao_mais" && sleep 1 && toque_texto "$1"; }
+# garante as barras do leitor à vista (um toque no meio as mostra ou esconde)
+barras() { despejar_ui; [ -n "$(python3 "$ACHAR" "$OUT/ui.xml" id "$PKG:id/botao_mais")" ] || { adb shell input tap $CX $CY; sleep 1.5; }; }
+menu() { barras; toque_id "$PKG:id/botao_mais" && sleep 1 && toque_texto "$1"; }
 ir_para_pagina() {
+  barras
   toque_id "$PKG:id/rotulo_pagina" && sleep 1
   adb shell input text "$1"
   adb shell input keyevent 66
@@ -152,9 +155,14 @@ read -r BX1 BY1 BX2 BY2 <<< "$(python3 "$ACHAR" "$OUT/ui.xml" limites "$PKG:id/b
 ESC=$(python3 -c "d=$DENS/160; m=6*d; print(($W-2*m)/595)")
 Y_INTERNO=$(python3 -c "d=$DENS/160; print(int($BY2 + 6*d + 270*$ESC))")
 Y_EXTERNO=$(python3 -c "d=$DENS/160; print(int($BY2 + 6*d + 350*$ESC))")
+Y_GOTO=$(python3 -c "d=$DENS/160; print(int($BY2 + 6*d + 430*$ESC))")
 tela 20_pagina_1 1
 adb shell input tap $CX "$Y_INTERNO"
 tela 21_link_interno 3
+ir_para_pagina 1
+sleep 2
+adb shell input tap $CX "$Y_GOTO"
+tela 21b_link_goto 3
 
 echo "== 16. Link externo"
 ir_para_pagina 1
@@ -181,27 +189,19 @@ else
   echo "(sem busca neste Android)"
 fi
 
-echo "== 18. Seleção de texto (toque longo)"
+echo "== 18. Seleção de texto (toque longo numa linha da página 2)"
 ir_para_pagina 2
 sleep 2
-selecionou=""
-for dy in 0 14 28 42 56 70; do
-  toque_longo $((W * 3 / 10)) $((H / 2 + dy))
-  sleep 2
-  if tem_texto "Copy" || tem_texto "Copiar"; then selecionou=1; break; fi
-done
-tela 25_selecao 0.5
-if [ -n "$selecionou" ]; then
-  toque_texto "Copy" || toque_texto "Copiar"
-  tela 26_copiado 1
-else
-  echo "(nenhuma seleção)"
-  adb shell input tap $CX $CY
-  sleep 1
-  adb shell input tap $CX $CY
-fi
+# 3ª linha do texto: linha de base a 244 pt do topo da página; meio das letras ~240 pt
+X_TEXTO=$(python3 -c "d=$DENS/160; print(int(6*d + 110*$ESC))")
+Y_TEXTO=$(python3 -c "d=$DENS/160; print(int($BY2 + 6*d + 240*$ESC))")
+toque_longo "$X_TEXTO" "$Y_TEXTO"
+tela 25_selecao 2
+adb shell input tap $CX $((H * 3 / 4))   # um toque fora tira a seleção
+sleep 1
 
 echo "== 19. Menu e cortar margens"
+barras
 toque_id "$PKG:id/botao_mais"
 tela 27_menu 1.5
 toque_texto "Cortar margens"
@@ -226,6 +226,7 @@ adb shell input keyevent 4
 sleep 1
 
 echo "== 22. Miniaturas"
+barras
 toque_id "$PKG:id/botao_miniaturas"
 tela 34_miniaturas 4
 toque_texto "3"

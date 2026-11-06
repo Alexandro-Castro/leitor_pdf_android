@@ -37,9 +37,11 @@ def conteudo(n, w, h):
             f"BT /F2 18 Tf 0.1 0.25 0.7 rg 64 {h - 278} Td ({esc('Toque aqui: ir para a página 5')}) Tj ET",
             f"0.92 1 0.92 rg 50 {h - 380} {w - 100} 60 re f",
             f"BT /F2 18 Tf 0.1 0.45 0.2 rg 64 {h - 358} Td ({esc('Link externo: example.com')}) Tj ET",
+            f"1 0.95 0.88 rg 50 {h - 460} {w - 100} 60 re f",
+            f"BT /F2 18 Tf 0.6 0.35 0 rg 64 {h - 438} Td ({esc('Ação GoTo: ir para a página 7')}) Tj ET",
             "0 0 0 rg",
         ]
-        y = h - 420
+        y = h - 500
     i = n
     while y > 110:
         linhas.append(f"BT /F1 13 Tf 50 {y} Td ({esc(FRASES[i % len(FRASES)])}) Tj ET")
@@ -64,15 +66,19 @@ def main(destino):
         proximo += 2
         anotacoes = ""
         if n == 1:
-            anotacoes = f" /Annots [{proximo} 0 R {proximo + 1} 0 R]"
+            anotacoes = f" /Annots [{proximo} 0 R {proximo + 1} 0 R {proximo + 2} 0 R]"
             pagina5 = 5 + 2 * 4  # objeto da página 5
+            pagina7 = 5 + 2 * 6
+            objetos[proximo + 2] = (
+                f"<< /Type /Annot /Subtype /Link /Rect [50 {h - 460} {w - 50} {h - 400}] "
+                f"/Border [0 0 0] /A << /S /GoTo /D [{pagina7} 0 R /XYZ 0 842 0] >> >>").encode()
             objetos[proximo] = (
                 f"<< /Type /Annot /Subtype /Link /Rect [50 {h - 300} {w - 50} {h - 240}] "
                 f"/Border [0 0 0] /Dest [{pagina5} 0 R /XYZ 0 842 0] >>").encode()
             objetos[proximo + 1] = (
                 f"<< /Type /Annot /Subtype /Link /Rect [50 {h - 380} {w - 50} {h - 320}] "
                 f"/Border [0 0 0] /A << /S /URI /URI (https://example.com/) >> >>").encode()
-            proximo += 2
+            proximo += 3
         objetos[id_pag] = (
             f"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 {w} {h}] "
             f"/Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents {id_cont} 0 R{anotacoes} >>"

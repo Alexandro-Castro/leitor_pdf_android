@@ -103,6 +103,11 @@ final class Miniaturas extends BaseAdapter implements AbsListView.OnScrollListen
         item.setActivated(posicao == atual);
         Bitmap b = cache.get(posicao);
         imagem.setImageBitmap(b);
+        if (b != null) {
+            imagem.setBackground(null);
+        } else {
+            imagem.setBackgroundColor(contexto.getColor(R.color.fundo_leitor));
+        }
         imagem.setColorFilter(filtro);
         if (b == null) pedir(posicao, largura > 0 ? largura : 240);
         return item;

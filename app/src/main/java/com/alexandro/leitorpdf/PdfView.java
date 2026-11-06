@@ -1324,7 +1324,14 @@ public class PdfView extends View {
                 try {
                     achados = motor.links(i);
                 } catch (Exception e) {
+                    Log.w(TAG, "falha ao ler links da página " + (i + 1), e);
                     achados = Collections.emptyList();
+                }
+                if (depurar) {
+                    for (Motor.Link l : achados) {
+                        Log.d(TAG, "link p" + (i + 1) + " " + l.areas + " uri=" + l.uri
+                                + " destino=" + l.destinoPagina + " y=" + l.destinoY);
+                    }
                 }
             }
             final List<Motor.Link> linksDaPagina = achados;
