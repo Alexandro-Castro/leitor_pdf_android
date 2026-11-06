@@ -9,7 +9,6 @@ import android.graphics.RectF;
 import android.graphics.pdf.LoadParams;
 import android.graphics.pdf.PdfRendererPreV;
 import android.graphics.pdf.RenderParams;
-import android.graphics.pdf.content.PdfPageGotoLinkContent;
 import android.graphics.pdf.content.PdfPageLinkContent;
 import android.graphics.pdf.models.PageMatchBounds;
 import android.graphics.pdf.models.selection.PageSelection;
@@ -84,11 +83,9 @@ final class MotorPreV extends Motor {
             for (PdfPageLinkContent l : p.getLinkContents()) {
                 resultado.add(new Link(new ArrayList<>(l.getBounds()), l.getUri(), -1, -1f));
             }
-            for (PdfPageGotoLinkContent g : p.getGotoLinks()) {
-                PdfPageGotoLinkContent.Destination d = g.getDestination();
-                resultado.add(new Link(new ArrayList<>(g.getBounds()), null,
-                        d.getPageNumber(), d.getYCoordinate()));
-            }
+            // Links internos (getGotoLinks) ficam de fora: no Android 15 essa função do
+            // sistema derruba o app com alguns PDFs (destino com página -1 dentro do código
+            // nativo). Só os links para sites são lidos.
         }
         return resultado;
     }

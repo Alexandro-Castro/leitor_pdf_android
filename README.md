@@ -12,17 +12,33 @@ Para atualizar, repita os mesmos passos. A versão nova é instalada por cima da
 
 ## O que ele faz
 
-- **Rolagem contínua** pelas páginas, com **zoom** de pinça ou de toque duplo. Com zoom, a página é redesenhada em alta resolução.
-- **Toque na página** para esconder ou mostrar as barras (tela cheia).
-- **Barra de páginas** embaixo: arraste para pular, ou toque no número (ex.: `12 / 140`) para digitar a página.
+**Leitura**
+- **Rolagem contínua** pelas páginas, ou **página por página** (deslize para o lado, ou toque nas bordas esquerda e direita da tela).
+- **Zoom** de pinça ou de toque duplo. Com zoom, a página é redesenhada em alta resolução.
+- **Cortar margens**: tira as margens brancas para o texto ficar maior.
+- **Toque no meio da página** para esconder ou mostrar as barras (tela cheia).
 - **Modo noturno**: fundo escuro e texto claro, mantendo as cores das imagens parecidas.
+- A tela não apaga enquanto você lê. Depois de 5 minutos sem tocar na tela, ela volta a apagar normalmente.
+
+**Navegação**
+- **Barra de páginas** embaixo: arraste para pular, ou toque no número (ex.: `12 / 140`) para digitar a página.
+- **Miniaturas**: o botão de grade, ao lado da barra de páginas, mostra todas as páginas para você escolher.
+- **Marcadores**: no menu ⋮, *Marcar esta página* guarda a página com um nome, e *Marcadores* lista as páginas guardadas. Para apagar um marcador, toque nele e segure. A página marcada ganha uma fitinha no canto.
+- **Virar página com os botões de volume** (opção no menu ⋮).
+- **Travar rotação** na posição atual (opção no menu ⋮).
 - **Lembra onde você parou** em cada PDF, mesmo quando ele é aberto por outro app.
 - **Recentes** na tela inicial, com o progresso de leitura. Para remover um item da lista, toque nele e segure.
 - Aparece em **"Abrir com"** e em **"Compartilhar"** nos outros apps (WhatsApp, e-mail, gerenciador de arquivos, Downloads).
-- A tela não apaga enquanto você lê. Depois de 5 minutos sem tocar na tela, ela volta a apagar normalmente.
-- Segue o tema claro ou escuro do sistema.
 
-Limitações atuais: não abre PDFs protegidos por senha, e ainda não tem busca de texto.
+**Texto** (Android 15, ou Android 11 a 14 com as atualizações do sistema em dia)
+- **Busca**: a lupa na barra de cima procura no documento inteiro, destaca os resultados, e as setas pulam de um para o outro.
+- **Selecionar e copiar**: toque e segure numa palavra, ajuste pelas alças azuis e toque em *Copiar*.
+- **Links para sites**: tocar num link abre o navegador. (Links internos, que levam a outra página do PDF, ainda não funcionam.)
+- **PDFs com senha**: o app pede a senha ao abrir.
+
+Nos aparelhos sem esses recursos do sistema, a lupa não aparece e PDFs com senha não abrem. O resto funciona igual.
+
+Segue o tema claro ou escuro do sistema.
 
 Os PDFs abertos pelo botão **Abrir PDF** entram nos recentes. Os abertos por outros apps também têm a página lembrada, mas o Android só dá acesso temporário a eles, por isso não entram na lista.
 
