@@ -1,0 +1,18 @@
+--------- beginning of crash
+11-06 19:41:53.434  2375  2456 E AndroidRuntime: FATAL EXCEPTION: DefaultDispatcher-worker-3
+11-06 19:41:53.434  2375  2456 E AndroidRuntime: Process: com.google.android.apps.wallpaper, PID: 2375
+11-06 19:41:53.434  2375  2456 E AndroidRuntime: java.util.ConcurrentModificationException
+11-06 19:41:53.434  2375  2456 E AndroidRuntime: 	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1111)
+11-06 19:41:53.434  2375  2456 E AndroidRuntime: 	at java.util.ArrayList$Itr.next(ArrayList.java:1064)
+11-06 19:41:53.434  2375  2456 E AndroidRuntime: 	at com.google.android.apps.wallpaper.module.RecentWallpaperUtils$findAndFormatDefaultRecents$2.invokeSuspend(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:64)
+11-06 19:41:53.434  2375  2456 E AndroidRuntime: 	at com.google.android.apps.wallpaper.module.RecentWallpaperUtils$findAndFormatDefaultRecents$2.invoke(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:13)
+11-06 19:41:53.434  2375  2456 E AndroidRuntime: 	at kotlinx.coroutines.intrinsics.UndispatchedKt.startUndispatchedOrReturn(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:5)
+11-06 19:41:53.434  2375  2456 E AndroidRuntime: 	at kotlinx.coroutines.BuildersKt.withContext(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:84)
+11-06 19:41:53.434  2375  2456 E AndroidRuntime: 	at com.google.android.apps.wallpaper.module.DefaultGoogleWallpaperPreferences.access$initializeDefaults(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:179)
+11-06 19:41:53.434  2375  2456 E AndroidRuntime: 	at com.google.android.apps.wallpaper.module.DefaultGoogleWallpaperPreferences$initializeDefaults$1.invokeSuspend(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:12)
+11-06 19:41:53.434  2375  2456 E AndroidRuntime: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:8)
+11-06 19:41:53.434  2375  2456 E AndroidRuntime: 	at kotlinx.coroutines.DispatchedTask.run(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:113)
+11-06 19:41:53.434  2375  2456 E AndroidRuntime: 	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:4)
+11-06 19:41:53.434  2375  2456 E AndroidRuntime: 	at kotlinx.coroutines.scheduling.TaskImpl.run(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:3)
+11-06 19:41:53.434  2375  2456 E AndroidRuntime: 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:91)
+11-06 19:41:53.434  2375  2456 E AndroidRuntime: 	Suppressed: kotlinx.coroutines.internal.DiagnosticCoroutineContextException: [StandaloneCoroutine{Cancelling}@f5be872, Dispatchers.IO]

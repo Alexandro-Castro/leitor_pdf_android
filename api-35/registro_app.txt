@@ -1,0 +1,178 @@
+--------- beginning of main
+11-06 19:41:50.250 D/LeitorPDF( 2160): motor Android 15, 12 páginas
+11-06 19:41:50.327 D/LeitorPDF( 2160): layout 1080x2400 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:41:50.344 D/LeitorPDF( 2160): pedido p1 1048x1483
+11-06 19:41:50.345 D/LeitorPDF( 2160): pedido p2 1048x1483
+11-06 19:41:50.345 D/LeitorPDF( 2160): pedido p3 1048x1483
+11-06 19:41:50.573 D/LeitorPDF( 2160): link p1 [RectF(50.0, 320.0, 545.0, 380.0)] uri=https://example.com/ destino=-1 y=-1.0
+11-06 19:41:50.626 D/LeitorPDF( 2160): p1 pronta em 278 ms
+11-06 19:41:50.687 D/LeitorPDF( 2160): p2 pronta em 59 ms
+11-06 19:41:50.962 D/LeitorPDF( 2160): p3 pronta em 268 ms
+--------- beginning of crash
+11-06 19:41:53.434 E/AndroidRuntime( 2375): FATAL EXCEPTION: DefaultDispatcher-worker-3
+11-06 19:41:53.434 E/AndroidRuntime( 2375): Process: com.google.android.apps.wallpaper, PID: 2375
+11-06 19:41:53.434 E/AndroidRuntime( 2375): java.util.ConcurrentModificationException
+11-06 19:41:53.434 E/AndroidRuntime( 2375): 	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1111)
+11-06 19:41:53.434 E/AndroidRuntime( 2375): 	at java.util.ArrayList$Itr.next(ArrayList.java:1064)
+11-06 19:41:53.434 E/AndroidRuntime( 2375): 	at com.google.android.apps.wallpaper.module.RecentWallpaperUtils$findAndFormatDefaultRecents$2.invokeSuspend(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:64)
+11-06 19:41:53.434 E/AndroidRuntime( 2375): 	at com.google.android.apps.wallpaper.module.RecentWallpaperUtils$findAndFormatDefaultRecents$2.invoke(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:13)
+11-06 19:41:53.434 E/AndroidRuntime( 2375): 	at kotlinx.coroutines.intrinsics.UndispatchedKt.startUndispatchedOrReturn(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:5)
+11-06 19:41:53.434 E/AndroidRuntime( 2375): 	at kotlinx.coroutines.BuildersKt.withContext(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:84)
+11-06 19:41:53.434 E/AndroidRuntime( 2375): 	at com.google.android.apps.wallpaper.module.DefaultGoogleWallpaperPreferences.access$initializeDefaults(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:179)
+11-06 19:41:53.434 E/AndroidRuntime( 2375): 	at com.google.android.apps.wallpaper.module.DefaultGoogleWallpaperPreferences$initializeDefaults$1.invokeSuspend(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:12)
+11-06 19:41:53.434 E/AndroidRuntime( 2375): 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:8)
+11-06 19:41:53.434 E/AndroidRuntime( 2375): 	at kotlinx.coroutines.DispatchedTask.run(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:113)
+11-06 19:41:53.434 E/AndroidRuntime( 2375): 	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:4)
+11-06 19:41:53.434 E/AndroidRuntime( 2375): 	at kotlinx.coroutines.scheduling.TaskImpl.run(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:3)
+11-06 19:41:53.434 E/AndroidRuntime( 2375): 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(go/retraceme d6f212a037a92e27b871ef330d2431eb86fce3cd6929ce7659e77740cd8f14d3:91)
+11-06 19:41:53.434 E/AndroidRuntime( 2375): 	Suppressed: kotlinx.coroutines.internal.DiagnosticCoroutineContextException: [StandaloneCoroutine{Cancelling}@f5be872, Dispatchers.IO]
+11-06 19:41:55.489 D/LeitorPDF( 2160): pedido p4 1048x1483
+11-06 19:41:55.826 D/LeitorPDF( 2160): p4 pronta em 264 ms
+11-06 19:42:20.969 D/LeitorPDF( 2160): pedido p8 1048x1483
+11-06 19:42:20.969 D/LeitorPDF( 2160): pedido p9 1048x1483
+11-06 19:42:20.969 D/LeitorPDF( 2160): pedido p10 1048x1483
+11-06 19:42:20.969 D/LeitorPDF( 2160): pedido p11 1048x740
+11-06 19:42:20.970 D/LeitorPDF( 2160): pedido p7 1048x1483
+11-06 19:42:21.496 D/LeitorPDF( 2160): p8 pronta em 505 ms
+11-06 19:42:21.732 D/LeitorPDF( 2160): p9 pronta em 236 ms
+11-06 19:42:21.984 D/LeitorPDF( 2160): p10 pronta em 249 ms
+11-06 19:42:22.104 D/LeitorPDF( 2160): p11 pronta em 104 ms
+11-06 19:42:22.138 D/LeitorPDF( 2160): p7 pronta em 34 ms
+11-06 19:42:24.898 D/LeitorPDF( 2160): layout 1080x2400 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:42:24.919 D/LeitorPDF( 2160): layout 2400x1080 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:42:24.932 D/LeitorPDF( 2160): pedido p8 1333x1887
+11-06 19:42:24.940 D/LeitorPDF( 2160): pedido p9 1333x1887
+11-06 19:42:24.940 D/LeitorPDF( 2160): pedido p10 1333x1887
+11-06 19:42:24.940 D/LeitorPDF( 2160): pedido p7 1333x1887
+11-06 19:42:25.159 D/LeitorPDF( 2160): p8 pronta em 226 ms
+11-06 19:42:25.263 D/LeitorPDF( 2160): p9 pronta em 102 ms
+11-06 19:42:25.334 D/LeitorPDF( 2160): p10 pronta em 68 ms
+11-06 19:42:25.351 D/LeitorPDF( 2160): p7 pronta em 17 ms
+11-06 19:42:30.287 D/LeitorPDF( 2160): layout 2400x1080 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:42:30.300 D/LeitorPDF( 2160): layout 1080x2400 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:42:30.386 D/LeitorPDF( 2160): pedido p8 1048x1483
+11-06 19:42:30.387 D/LeitorPDF( 2160): pedido p9 1048x1483
+11-06 19:42:30.387 D/LeitorPDF( 2160): pedido p10 1048x1483
+11-06 19:42:30.387 D/LeitorPDF( 2160): pedido p11 1048x740
+11-06 19:42:30.387 D/LeitorPDF( 2160): pedido p7 1048x1483
+11-06 19:42:30.528 D/LeitorPDF( 2160): p8 pronta em 108 ms
+11-06 19:42:30.618 D/LeitorPDF( 2160): p9 pronta em 34 ms
+11-06 19:42:30.830 D/LeitorPDF( 2160): p10 pronta em 209 ms
+11-06 19:42:30.852 D/LeitorPDF( 2160): p11 pronta em 21 ms
+11-06 19:42:30.866 D/LeitorPDF( 2160): p7 pronta em 13 ms
+11-06 19:42:42.690 D/LeitorPDF( 4256): motor Android 15, 12 páginas
+11-06 19:42:42.914 D/LeitorPDF( 4256): layout 1080x2400 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:42:42.987 D/LeitorPDF( 4256): pedido p8 1048x1483
+11-06 19:42:42.989 D/LeitorPDF( 4256): pedido p9 1048x1483
+11-06 19:42:42.990 D/LeitorPDF( 4256): pedido p10 1048x1483
+11-06 19:42:42.990 D/LeitorPDF( 4256): pedido p11 1048x740
+11-06 19:42:42.990 D/LeitorPDF( 4256): pedido p7 1048x1483
+11-06 19:42:43.602 D/LeitorPDF( 4256): p8 pronta em 615 ms
+11-06 19:42:43.614 D/LeitorPDF( 4256): p9 pronta em 11 ms
+11-06 19:42:43.674 D/LeitorPDF( 4256): p10 pronta em 44 ms
+11-06 19:42:43.758 D/LeitorPDF( 4256): p11 pronta em 84 ms
+11-06 19:42:44.137 D/LeitorPDF( 4256): p7 pronta em 369 ms
+11-06 19:43:08.021 D/LeitorPDF( 4256): motor Android 15, 12 páginas
+11-06 19:43:08.157 D/LeitorPDF( 4256): layout 1080x2400 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:43:08.164 D/LeitorPDF( 4256): pedido p8 1048x1483
+11-06 19:43:08.165 D/LeitorPDF( 4256): pedido p9 1048x1483
+11-06 19:43:08.165 D/LeitorPDF( 4256): pedido p10 1048x1483
+11-06 19:43:08.165 D/LeitorPDF( 4256): pedido p11 1048x740
+11-06 19:43:08.165 D/LeitorPDF( 4256): pedido p7 1048x1483
+11-06 19:43:08.362 D/LeitorPDF( 4256): p8 pronta em 164 ms
+11-06 19:43:08.493 D/LeitorPDF( 4256): p9 pronta em 130 ms
+11-06 19:43:08.534 D/LeitorPDF( 4256): p10 pronta em 40 ms
+11-06 19:43:08.607 D/LeitorPDF( 4256): p11 pronta em 73 ms
+11-06 19:43:08.714 D/LeitorPDF( 4256): p7 pronta em 107 ms
+11-06 19:43:18.762 D/LeitorPDF( 4256): pedido p1 1048x1483
+11-06 19:43:18.762 D/LeitorPDF( 4256): pedido p2 1048x1483
+11-06 19:43:18.762 D/LeitorPDF( 4256): pedido p3 1048x1483
+11-06 19:43:18.962 D/LeitorPDF( 4256): link p1 [RectF(50.0, 320.0, 545.0, 380.0)] uri=https://example.com/ destino=-1 y=-1.0
+11-06 19:43:18.964 D/LeitorPDF( 4256): p1 pronta em 111 ms
+11-06 19:43:19.207 D/LeitorPDF( 4256): p2 pronta em 243 ms
+11-06 19:43:19.239 D/LeitorPDF( 4256): p3 pronta em 32 ms
+11-06 19:44:07.990 D/LeitorPDF( 4256): pedido p4 1048x1483
+11-06 19:44:07.999 D/LeitorPDF( 4256): p4 pronta em 8 ms
+11-06 19:44:34.074 D/LeitorPDF( 4256): margens: 0.03625 0.090619475 0.9575 0.9757522
+11-06 19:44:34.150 D/LeitorPDF( 4256): layout 1080x2400 contínuo corte 0.03625,0.090619475,0.9575,0.9757522
+11-06 19:44:34.153 D/LeitorPDF( 4256): pedido p1 1048x1425
+11-06 19:44:34.160 D/LeitorPDF( 4256): pedido p2 1048x1425
+11-06 19:44:34.160 D/LeitorPDF( 4256): pedido p3 1048x1425
+11-06 19:44:34.160 D/LeitorPDF( 4256): pedido p4 1048x1425
+11-06 19:44:34.178 D/LeitorPDF( 4256): p1 pronta em 24 ms
+11-06 19:44:34.188 D/LeitorPDF( 4256): p2 pronta em 10 ms
+11-06 19:44:34.196 D/LeitorPDF( 4256): p3 pronta em 8 ms
+11-06 19:44:34.205 D/LeitorPDF( 4256): p4 pronta em 8 ms
+11-06 19:44:45.488 D/LeitorPDF( 4256): layout 1080x2400 página corte 0.03625,0.090619475,0.9575,0.9757522
+11-06 19:44:45.512 D/LeitorPDF( 4256): pedido p2 1048x1425
+11-06 19:44:45.513 D/LeitorPDF( 4256): pedido p3 1048x1425
+11-06 19:44:45.513 D/LeitorPDF( 4256): pedido p1 1048x1425
+11-06 19:44:45.553 D/LeitorPDF( 4256): p2 pronta em 40 ms
+11-06 19:44:45.615 D/LeitorPDF( 4256): p3 pronta em 61 ms
+11-06 19:44:45.642 D/LeitorPDF( 4256): p1 pronta em 26 ms
+11-06 19:44:49.770 D/LeitorPDF( 4256): pedido p4 1048x1425
+11-06 19:44:49.779 D/LeitorPDF( 4256): p4 pronta em 9 ms
+11-06 19:45:43.020 D/LeitorPDF( 4256): pedido p5 1048x1425
+11-06 19:45:43.030 D/LeitorPDF( 4256): p5 pronta em 10 ms
+11-06 19:45:53.578 D/LeitorPDF( 4256): layout 1080x2400 contínuo corte 0.03625,0.090619475,0.9575,0.9757522
+11-06 19:45:53.590 D/LeitorPDF( 4256): pedido p3 1048x1425
+11-06 19:45:53.590 D/LeitorPDF( 4256): pedido p4 1048x1425
+11-06 19:45:53.590 D/LeitorPDF( 4256): pedido p5 1048x1425
+11-06 19:45:53.590 D/LeitorPDF( 4256): pedido p6 1048x1425
+11-06 19:45:53.590 D/LeitorPDF( 4256): pedido p2 1048x1425
+11-06 19:45:53.676 D/LeitorPDF( 4256): p3 pronta em 85 ms
+11-06 19:45:53.702 D/LeitorPDF( 4256): p4 pronta em 26 ms
+11-06 19:45:53.723 D/LeitorPDF( 4256): p5 pronta em 18 ms
+11-06 19:45:53.754 D/LeitorPDF( 4256): p6 pronta em 32 ms
+11-06 19:45:53.772 D/LeitorPDF( 4256): p2 pronta em 17 ms
+11-06 19:46:01.805 D/LeitorPDF( 4256): layout 1080x2400 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:46:01.828 D/LeitorPDF( 4256): pedido p3 1048x1483
+11-06 19:46:01.828 D/LeitorPDF( 4256): pedido p4 1048x1483
+11-06 19:46:01.828 D/LeitorPDF( 4256): pedido p5 1048x1483
+11-06 19:46:01.828 D/LeitorPDF( 4256): pedido p6 1048x1483
+11-06 19:46:01.828 D/LeitorPDF( 4256): pedido p2 1048x1483
+11-06 19:46:01.837 D/LeitorPDF( 4256): p3 pronta em 9 ms
+11-06 19:46:01.998 D/LeitorPDF( 4256): p4 pronta em 161 ms
+11-06 19:46:02.050 D/LeitorPDF( 4256): p5 pronta em 44 ms
+11-06 19:46:02.061 D/LeitorPDF( 4256): p6 pronta em 11 ms
+11-06 19:46:02.209 D/LeitorPDF( 4256): p2 pronta em 148 ms
+11-06 19:46:23.501 D/LeitorPDF( 5941): motor Android 15, 12 páginas
+11-06 19:46:23.619 D/LeitorPDF( 5941): layout 1080x2400 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:46:23.689 D/LeitorPDF( 5941): pedido p1 1048x1483
+11-06 19:46:23.689 D/LeitorPDF( 5941): pedido p2 1048x1483
+11-06 19:46:23.689 D/LeitorPDF( 5941): pedido p3 1048x1483
+11-06 19:46:23.789 D/LeitorPDF( 5941): link p1 [RectF(50.0, 320.0, 545.0, 380.0)] uri=https://example.com/ destino=-1 y=-1.0
+11-06 19:46:23.789 D/LeitorPDF( 5941): p1 pronta em 69 ms
+11-06 19:46:23.843 D/LeitorPDF( 5941): p2 pronta em 54 ms
+11-06 19:46:23.855 D/LeitorPDF( 5941): p3 pronta em 9 ms
+11-06 19:46:27.513 D/LeitorPDF( 5941): motor Android 15, 12 páginas
+11-06 19:46:27.660 D/LeitorPDF( 5941): layout 1080x2400 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:46:27.680 D/LeitorPDF( 5941): pedido p1 1048x1483
+11-06 19:46:27.680 D/LeitorPDF( 5941): pedido p2 1048x1483
+11-06 19:46:27.680 D/LeitorPDF( 5941): pedido p3 1048x1483
+11-06 19:46:27.886 D/LeitorPDF( 5941): link p1 [RectF(50.0, 320.0, 545.0, 380.0)] uri=https://example.com/ destino=-1 y=-1.0
+11-06 19:46:27.886 D/LeitorPDF( 5941): p1 pronta em 161 ms
+11-06 19:46:28.118 D/LeitorPDF( 5941): p2 pronta em 229 ms
+11-06 19:46:28.129 D/LeitorPDF( 5941): p3 pronta em 10 ms
+11-06 19:46:33.248 D/LeitorPDF( 6113): motor Android 15, 12 páginas
+11-06 19:46:33.925 D/LeitorPDF( 6113): layout 1080x2400 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:46:33.951 D/LeitorPDF( 6113): pedido p3 1048x1483
+11-06 19:46:33.952 D/LeitorPDF( 6113): pedido p4 1048x1483
+11-06 19:46:33.953 D/LeitorPDF( 6113): pedido p5 1048x1483
+11-06 19:46:33.953 D/LeitorPDF( 6113): pedido p6 1048x1483
+11-06 19:46:33.954 D/LeitorPDF( 6113): pedido p2 1048x1483
+11-06 19:46:33.996 D/LeitorPDF( 6113): p3 pronta em 31 ms
+11-06 19:46:34.005 D/LeitorPDF( 6113): p4 pronta em 8 ms
+11-06 19:46:34.015 D/LeitorPDF( 6113): p5 pronta em 9 ms
+11-06 19:46:34.024 D/LeitorPDF( 6113): p6 pronta em 9 ms
+11-06 19:46:34.041 D/LeitorPDF( 6113): p2 pronta em 16 ms
+11-06 19:46:38.478 D/LeitorPDF( 6113): motor Android 15, 12 páginas
+11-06 19:46:38.593 D/LeitorPDF( 6113): layout 1080x2400 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:46:38.620 D/LeitorPDF( 6113): pedido p3 1048x1483
+11-06 19:46:38.620 D/LeitorPDF( 6113): pedido p4 1048x1483
+11-06 19:46:38.620 D/LeitorPDF( 6113): pedido p5 1048x1483
+11-06 19:46:38.620 D/LeitorPDF( 6113): pedido p6 1048x1483
+11-06 19:46:38.620 D/LeitorPDF( 6113): pedido p2 1048x1483
+11-06 19:46:38.801 D/LeitorPDF( 6113): p3 pronta em 170 ms
+11-06 19:46:38.995 D/LeitorPDF( 6113): p4 pronta em 171 ms
+11-06 19:46:39.147 D/LeitorPDF( 6113): p5 pronta em 152 ms

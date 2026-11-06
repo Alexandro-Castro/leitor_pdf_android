@@ -1,0 +1,377 @@
+11-06 19:42:27.804 D/AndroidRuntime( 4796): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:42:27.902 D/AndroidRuntime( 4796): Calling main entry com.android.commands.input.Input
+11-06 19:42:28.277 D/AndroidRuntime( 4796): Shutting down VM
+11-06 19:42:31.470 D/AndroidRuntime( 4848): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:42:31.515 D/AndroidRuntime( 4848): Calling main entry com.android.commands.input.Input
+11-06 19:42:31.523 D/AndroidRuntime( 4848): Shutting down VM
+11-06 19:42:31.530 I/AndroidRuntime( 4848): NOTE: attach of thread 'Binder:4848_2' failed
+11-06 19:42:34.065 D/AndroidRuntime( 4890): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:42:34.322 D/AndroidRuntime( 4890): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:42:35.354 D/AndroidRuntime( 4890): Shutting down VM
+11-06 19:42:35.573 D/AndroidRuntime( 4912): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:42:35.610 D/AndroidRuntime( 4912): Calling main entry com.android.commands.input.Input
+11-06 19:42:35.615 D/AndroidRuntime( 4912): Shutting down VM
+11-06 19:42:38.047 D/AndroidRuntime( 4940): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:42:38.097 D/AndroidRuntime( 4940): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:42:39.119 D/AndroidRuntime( 4940): Shutting down VM
+11-06 19:42:39.326 D/AndroidRuntime( 4953): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:42:39.375 D/AndroidRuntime( 4953): Calling main entry com.android.commands.input.Input
+11-06 19:42:39.379 D/AndroidRuntime( 4953): Shutting down VM
+11-06 19:42:40.024 I/chatty  ( 4304): uid=10077(u0_a77) com.alexandro.leitorpdf identical 15 lines
+11-06 19:42:41.848 D/AndroidRuntime( 4979): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:42:41.885 D/AndroidRuntime( 4979): Calling main entry com.android.commands.input.Input
+11-06 19:42:41.894 D/AndroidRuntime( 4979): Shutting down VM
+11-06 19:42:42.042 D/AndroidRuntime( 4989): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:42:42.078 D/AndroidRuntime( 4989): Calling main entry com.android.commands.input.Input
+11-06 19:42:42.131 D/AndroidRuntime( 4989): Shutting down VM
+11-06 19:42:42.129 I/chatty  ( 4304): uid=10077(u0_a77) com.alexandro.leitorpdf identical 7 lines
+11-06 19:42:55.169 D/AndroidRuntime( 5036): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:42:55.207 D/AndroidRuntime( 5036): Calling main entry com.android.commands.input.Input
+11-06 19:42:55.215 D/AndroidRuntime( 5036): Shutting down VM
+11-06 19:42:55.233 I/AndroidRuntime( 5036): NOTE: attach of thread 'Binder:5036_2' failed
+11-06 19:42:58.462 I/ActivityManager( 1663): Force stopping com.alexandro.leitorpdf appid=10077 user=0: from pid 5062
+11-06 19:42:58.462 I/ActivityManager( 1663): Killing 4304:com.alexandro.leitorpdf/u0a77 (adj 0): stop com.alexandro.leitorpdf
+11-06 19:42:58.465 W/ActivityManager( 1663): Force removing ActivityRecord{20218d8 u0 com.alexandro.leitorpdf/.MainActivity t6}: app died, no saved state
+11-06 19:42:58.470 I/WindowManager( 1663): Failed to capture screenshot of Token{d869431 ActivityRecord{20218d8 u0 com.alexandro.leitorpdf/.MainActivity t6 f}} appWin=Window{7e0c705 u0 com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity} drawState=4
+11-06 19:42:58.510 I/ActivityManager( 1663): START u0 {act=android.intent.action.VIEW dat=file:///data/data/com.alexandro.leitorpdf/files/exemplo.pdf typ=application/pdf flg=0x10000000 cmp=com.alexandro.leitorpdf/.MainActivity} from uid 2000
+11-06 19:42:58.707 I/ActivityManager( 1663): Start proc 5072:com.alexandro.leitorpdf/u0a77 for activity com.alexandro.leitorpdf/.MainActivity
+11-06 19:42:59.794 I/ActivityManager( 1663): Displayed com.alexandro.leitorpdf/.MainActivity: +1s91ms
+11-06 19:42:59.848 E/SurfaceFlinger( 1399): Failed to find layer (Splash Screen com.alexandro.leitorpdf#0) in layer parent (no-parent).
+11-06 19:43:04.263 D/AndroidRuntime( 5141): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:04.306 D/AndroidRuntime( 5141): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:43:05.336 D/AndroidRuntime( 5141): Shutting down VM
+11-06 19:43:05.557 D/AndroidRuntime( 5160): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:05.597 D/AndroidRuntime( 5160): Calling main entry com.android.commands.input.Input
+11-06 19:43:05.604 D/AndroidRuntime( 5160): Shutting down VM
+11-06 19:43:06.779 D/AndroidRuntime( 5178): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:06.835 D/AndroidRuntime( 5178): Calling main entry com.android.commands.input.Input
+11-06 19:43:06.847 D/AndroidRuntime( 5178): Shutting down VM
+11-06 19:43:06.950 I/ActivityManager( 1663): START u0 {flg=0x10000000 cmp=com.alexandro.leitorpdf/.MainActivity} from uid 2000
+11-06 19:43:07.374 I/ActivityManager( 1663): Displayed com.alexandro.leitorpdf/.MainActivity: +354ms
+11-06 19:43:10.890 D/AndroidRuntime( 5247): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:10.970 D/AndroidRuntime( 5247): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:43:12.010 D/AndroidRuntime( 5247): Shutting down VM
+11-06 19:43:12.357 D/AndroidRuntime( 5261): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:12.412 D/AndroidRuntime( 5261): Calling main entry com.android.commands.input.Input
+11-06 19:43:12.417 D/AndroidRuntime( 5261): Shutting down VM
+11-06 19:43:16.917 D/AndroidRuntime( 5397): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:16.995 D/AndroidRuntime( 5397): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:43:18.018 D/AndroidRuntime( 5397): Shutting down VM
+11-06 19:43:18.235 D/AndroidRuntime( 5413): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:18.275 D/AndroidRuntime( 5413): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:43:19.309 D/AndroidRuntime( 5413): Shutting down VM
+11-06 19:43:19.410 I/ActivityManager( 1663): START u0 {act=android.intent.action.VIEW dat=file:///data/data/com.alexandro.leitorpdf/files/exemplo.pdf typ=application/pdf flg=0x10000000 cmp=com.alexandro.leitorpdf/.MainActivity} from uid 2000
+11-06 19:43:19.611 I/ActivityManager( 1663): Displayed com.alexandro.leitorpdf/.MainActivity: +183ms
+11-06 19:43:23.725 D/AndroidRuntime( 5434): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:23.772 D/AndroidRuntime( 5434): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:43:24.801 D/AndroidRuntime( 5434): Shutting down VM
+11-06 19:43:25.007 D/AndroidRuntime( 5446): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:25.050 D/AndroidRuntime( 5446): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:43:26.075 D/AndroidRuntime( 5446): Shutting down VM
+11-06 19:43:26.306 D/AndroidRuntime( 5460): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:26.345 D/AndroidRuntime( 5460): Calling main entry com.android.commands.input.Input
+11-06 19:43:26.350 D/AndroidRuntime( 5460): Shutting down VM
+11-06 19:43:26.352 I/AndroidRuntime( 5460): NOTE: attach of thread 'Binder:5460_1' failed
+11-06 19:43:26.437 D/SurfaceFlinger( 1399): duplicate layer name: changing com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity to com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity#1
+11-06 19:43:26.871 I/chatty  ( 5072): uid=10077(u0_a77) com.alexandro.leitorpdf identical 15 lines
+11-06 19:43:27.551 D/AndroidRuntime( 5470): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:27.594 D/AndroidRuntime( 5470): Calling main entry com.android.commands.input.Input
+11-06 19:43:27.603 D/AndroidRuntime( 5470): Shutting down VM
+11-06 19:43:27.743 D/AndroidRuntime( 5480): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:27.779 D/AndroidRuntime( 5480): Calling main entry com.android.commands.input.Input
+11-06 19:43:27.827 D/AndroidRuntime( 5480): Shutting down VM
+11-06 19:43:27.880 E/SurfaceFlinger( 1399): Failed to find layer (com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity#1) in layer parent (no-parent).
+11-06 19:43:30.018 D/AndroidRuntime( 5490): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:30.065 D/AndroidRuntime( 5490): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:43:27.823 I/chatty  ( 5072): uid=10077(u0_a77) com.alexandro.leitorpdf identical 7 lines
+11-06 19:43:31.093 D/AndroidRuntime( 5490): Shutting down VM
+11-06 19:43:32.582 D/AndroidRuntime( 5511): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:32.619 D/AndroidRuntime( 5511): Calling main entry com.android.commands.input.Input
+11-06 19:43:32.623 D/AndroidRuntime( 5511): Shutting down VM
+11-06 19:43:35.998 D/AndroidRuntime( 5529): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:36.038 D/AndroidRuntime( 5529): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:43:37.055 D/AndroidRuntime( 5529): Shutting down VM
+11-06 19:43:37.240 D/AndroidRuntime( 5541): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:37.276 D/AndroidRuntime( 5541): Calling main entry com.android.commands.input.Input
+11-06 19:43:37.282 D/AndroidRuntime( 5541): Shutting down VM
+11-06 19:43:38.899 D/AndroidRuntime( 5551): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:38.942 D/AndroidRuntime( 5551): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:43:39.968 D/AndroidRuntime( 5551): Shutting down VM
+11-06 19:43:40.152 D/AndroidRuntime( 5563): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:40.188 D/AndroidRuntime( 5563): Calling main entry com.android.commands.input.Input
+11-06 19:43:40.197 D/AndroidRuntime( 5563): Shutting down VM
+11-06 19:43:40.279 D/SurfaceFlinger( 1399): duplicate layer name: changing com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity to com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity#1
+11-06 19:43:41.323 D/AndroidRuntime( 5573): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:41.377 D/AndroidRuntime( 5573): Calling main entry com.android.commands.input.Input
+11-06 19:43:41.385 D/AndroidRuntime( 5573): Shutting down VM
+11-06 19:43:41.525 D/AndroidRuntime( 5583): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:41.563 D/AndroidRuntime( 5583): Calling main entry com.android.commands.input.Input
+11-06 19:43:41.581 D/AndroidRuntime( 5583): Shutting down VM
+11-06 19:43:43.709 D/AndroidRuntime( 5594): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:43.744 D/AndroidRuntime( 5594): Calling main entry com.android.commands.input.Input
+11-06 19:43:43.749 D/AndroidRuntime( 5594): Shutting down VM
+11-06 19:43:47.124 D/AndroidRuntime( 5609): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:47.169 D/AndroidRuntime( 5609): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:43:41.577 I/chatty  ( 5072): uid=10077(u0_a77) com.alexandro.leitorpdf identical 7 lines
+11-06 19:43:48.187 D/AndroidRuntime( 5609): Shutting down VM
+11-06 19:43:48.373 D/AndroidRuntime( 5622): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:48.411 D/AndroidRuntime( 5622): Calling main entry com.android.commands.input.Input
+11-06 19:43:48.415 D/AndroidRuntime( 5622): Shutting down VM
+11-06 19:43:50.037 D/AndroidRuntime( 5634): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:50.079 D/AndroidRuntime( 5634): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:43:51.098 D/AndroidRuntime( 5634): Shutting down VM
+11-06 19:43:51.283 D/AndroidRuntime( 5646): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:51.318 D/AndroidRuntime( 5646): Calling main entry com.android.commands.input.Input
+11-06 19:43:51.323 D/AndroidRuntime( 5646): Shutting down VM
+11-06 19:43:51.388 D/SurfaceFlinger( 1399): duplicate layer name: changing com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity to com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity#1
+11-06 19:43:52.477 D/AndroidRuntime( 5656): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:52.518 D/AndroidRuntime( 5656): Calling main entry com.android.commands.input.Input
+11-06 19:43:52.529 D/AndroidRuntime( 5656): Shutting down VM
+11-06 19:43:52.662 D/AndroidRuntime( 5666): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:52.701 D/AndroidRuntime( 5666): Calling main entry com.android.commands.input.Input
+11-06 19:43:52.739 D/AndroidRuntime( 5666): Shutting down VM
+11-06 19:43:52.800 E/SurfaceFlinger( 1399): Failed to find layer (com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity#1) in layer parent (no-parent).
+11-06 19:43:54.871 D/AndroidRuntime( 5676): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:54.909 D/AndroidRuntime( 5676): Calling main entry com.android.commands.input.Input
+11-06 19:43:54.913 D/AndroidRuntime( 5676): Shutting down VM
+11-06 19:43:59.268 D/AndroidRuntime( 5695): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:43:59.304 D/AndroidRuntime( 5695): Calling main entry com.android.commands.input.Input
+11-06 19:43:52.737 I/chatty  ( 5072): uid=10077(u0_a77) com.alexandro.leitorpdf identical 7 lines
+11-06 19:43:59.322 D/AndroidRuntime( 5695): Shutting down VM
+11-06 19:44:01.449 D/AndroidRuntime( 5712): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:01.491 D/AndroidRuntime( 5712): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:44:02.513 D/AndroidRuntime( 5712): Shutting down VM
+11-06 19:44:02.611 I/ActivityManager( 1663): START u0 {act=android.intent.action.VIEW dat=file:///data/data/com.alexandro.leitorpdf/files/exemplo.pdf typ=application/pdf flg=0x10000000 cmp=com.alexandro.leitorpdf/.MainActivity} from uid 2000
+11-06 19:44:02.787 I/ActivityManager( 1663): Displayed com.alexandro.leitorpdf/.MainActivity: +164ms
+11-06 19:44:06.899 D/AndroidRuntime( 5737): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:06.944 D/AndroidRuntime( 5737): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:44:07.966 D/AndroidRuntime( 5737): Shutting down VM
+11-06 19:44:08.154 D/AndroidRuntime( 5749): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:08.195 D/AndroidRuntime( 5749): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:44:09.213 D/AndroidRuntime( 5749): Shutting down VM
+11-06 19:44:09.399 D/AndroidRuntime( 5761): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:09.439 D/AndroidRuntime( 5761): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:44:10.459 D/AndroidRuntime( 5761): Shutting down VM
+11-06 19:44:10.644 D/AndroidRuntime( 5773): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:10.680 D/AndroidRuntime( 5773): Calling main entry com.android.commands.input.Input
+11-06 19:44:10.684 D/AndroidRuntime( 5773): Shutting down VM
+11-06 19:44:10.759 D/SurfaceFlinger( 1399): duplicate layer name: changing com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity to com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity#1
+11-06 19:44:10.824 I/chatty  ( 5072): uid=10077(u0_a77) com.alexandro.leitorpdf identical 15 lines
+11-06 19:44:11.864 D/AndroidRuntime( 5783): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:11.902 D/AndroidRuntime( 5783): Calling main entry com.android.commands.input.Input
+11-06 19:44:11.910 D/AndroidRuntime( 5783): Shutting down VM
+11-06 19:44:12.044 D/AndroidRuntime( 5793): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:12.081 D/AndroidRuntime( 5793): Calling main entry com.android.commands.input.Input
+11-06 19:44:12.144 D/AndroidRuntime( 5793): Shutting down VM
+11-06 19:44:14.297 D/AndroidRuntime( 5804): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:14.335 D/AndroidRuntime( 5804): Calling main entry com.android.commands.input.Input
+11-06 19:44:15.537 D/AndroidRuntime( 5804): Shutting down VM
+11-06 19:44:12.143 I/chatty  ( 5072): uid=10077(u0_a77) com.alexandro.leitorpdf identical 7 lines
+11-06 19:44:17.881 D/AndroidRuntime( 5820): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:17.918 D/AndroidRuntime( 5820): Calling main entry com.android.commands.input.Input
+11-06 19:44:17.924 D/AndroidRuntime( 5820): Shutting down VM
+11-06 19:44:19.043 D/AndroidRuntime( 5830): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:19.084 D/AndroidRuntime( 5830): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:44:20.102 D/AndroidRuntime( 5830): Shutting down VM
+11-06 19:44:20.291 D/AndroidRuntime( 5843): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:20.331 D/AndroidRuntime( 5843): Calling main entry com.android.commands.input.Input
+11-06 19:44:20.337 D/AndroidRuntime( 5843): Shutting down VM
+11-06 19:44:21.955 D/AndroidRuntime( 5853): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:21.995 D/AndroidRuntime( 5853): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:44:23.014 D/AndroidRuntime( 5853): Shutting down VM
+11-06 19:44:23.202 D/AndroidRuntime( 5868): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:23.240 D/AndroidRuntime( 5868): Calling main entry com.android.commands.input.Input
+11-06 19:44:23.244 D/AndroidRuntime( 5868): Shutting down VM
+11-06 19:44:25.269 D/AndroidRuntime( 5883): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:25.372 D/AndroidRuntime( 5883): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:44:26.425 D/AndroidRuntime( 5883): Shutting down VM
+11-06 19:44:26.574 D/AndroidRuntime( 5896): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:26.609 D/AndroidRuntime( 5896): Calling main entry com.android.commands.input.Input
+11-06 19:44:26.616 D/AndroidRuntime( 5896): Shutting down VM
+11-06 19:44:31.022 D/AndroidRuntime( 5911): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:31.064 D/AndroidRuntime( 5911): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:44:32.082 D/AndroidRuntime( 5911): Shutting down VM
+11-06 19:44:32.283 D/AndroidRuntime( 5923): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:32.324 D/AndroidRuntime( 5923): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:44:33.345 D/AndroidRuntime( 5923): Shutting down VM
+11-06 19:44:33.532 D/AndroidRuntime( 5938): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:33.572 D/AndroidRuntime( 5938): Calling main entry com.android.commands.input.Input
+11-06 19:44:33.576 D/AndroidRuntime( 5938): Shutting down VM
+11-06 19:44:34.706 D/AndroidRuntime( 5948): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:34.751 D/AndroidRuntime( 5948): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:44:35.778 D/AndroidRuntime( 5948): Shutting down VM
+11-06 19:44:35.932 D/AndroidRuntime( 5961): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:35.972 D/AndroidRuntime( 5961): Calling main entry com.android.commands.input.Input
+11-06 19:44:35.981 D/AndroidRuntime( 5961): Shutting down VM
+11-06 19:44:40.344 D/AndroidRuntime( 5976): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:40.383 D/AndroidRuntime( 5976): Calling main entry com.android.commands.input.Input
+11-06 19:44:40.588 D/AndroidRuntime( 5976): Shutting down VM
+11-06 19:44:43.994 D/AndroidRuntime( 5993): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:44.031 D/AndroidRuntime( 5993): Calling main entry com.android.commands.input.Input
+11-06 19:44:44.035 D/AndroidRuntime( 5993): Shutting down VM
+11-06 19:44:47.419 D/AndroidRuntime( 6009): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:47.458 D/AndroidRuntime( 6009): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:44:48.477 D/AndroidRuntime( 6009): Shutting down VM
+11-06 19:44:48.673 D/AndroidRuntime( 6021): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:48.718 D/AndroidRuntime( 6021): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:44:49.738 D/AndroidRuntime( 6021): Shutting down VM
+11-06 19:44:49.924 D/AndroidRuntime( 6036): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:49.963 D/AndroidRuntime( 6036): Calling main entry com.android.commands.input.Input
+11-06 19:44:49.969 D/AndroidRuntime( 6036): Shutting down VM
+11-06 19:44:51.092 D/AndroidRuntime( 6046): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:51.134 D/AndroidRuntime( 6046): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:44:52.155 D/AndroidRuntime( 6046): Shutting down VM
+11-06 19:44:52.350 D/AndroidRuntime( 6061): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:52.390 D/AndroidRuntime( 6061): Calling main entry com.android.commands.input.Input
+11-06 19:44:52.396 D/AndroidRuntime( 6061): Shutting down VM
+11-06 19:44:52.500 D/SurfaceFlinger( 1399): duplicate layer name: changing com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity to com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity#1
+11-06 19:44:54.018 D/AndroidRuntime( 6082): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:54.060 D/AndroidRuntime( 6082): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:44:55.085 D/AndroidRuntime( 6082): Shutting down VM
+11-06 19:44:55.295 D/AndroidRuntime( 6094): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:55.332 D/AndroidRuntime( 6094): Calling main entry com.android.commands.input.Input
+11-06 19:44:55.336 D/AndroidRuntime( 6094): Shutting down VM
+11-06 19:44:55.338 I/AndroidRuntime( 6094): NOTE: attach of thread 'Binder:6094_1' failed
+11-06 19:44:57.738 D/AndroidRuntime( 6112): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:57.781 D/AndroidRuntime( 6112): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:44:58.800 D/AndroidRuntime( 6112): Shutting down VM
+11-06 19:44:58.982 D/AndroidRuntime( 6127): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:44:59.028 D/AndroidRuntime( 6127): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:45:00.055 D/AndroidRuntime( 6127): Shutting down VM
+11-06 19:45:00.248 D/AndroidRuntime( 6139): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:00.285 D/AndroidRuntime( 6139): Calling main entry com.android.commands.input.Input
+11-06 19:45:00.290 D/AndroidRuntime( 6139): Shutting down VM
+11-06 19:45:01.415 D/AndroidRuntime( 6149): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:01.458 D/AndroidRuntime( 6149): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:45:02.484 D/AndroidRuntime( 6149): Shutting down VM
+11-06 19:45:02.684 D/AndroidRuntime( 6164): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:02.724 D/AndroidRuntime( 6164): Calling main entry com.android.commands.input.Input
+11-06 19:45:02.731 D/AndroidRuntime( 6164): Shutting down VM
+11-06 19:45:02.847 D/SurfaceFlinger( 1399): duplicate layer name: changing com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity to com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity#1
+11-06 19:45:04.720 D/AndroidRuntime( 6179): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:04.804 D/AndroidRuntime( 6179): Calling main entry com.android.commands.input.Input
+11-06 19:45:04.922 D/AndroidRuntime( 6179): Shutting down VM
+11-06 19:45:06.067 D/AndroidRuntime( 6189): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:06.108 D/AndroidRuntime( 6189): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:45:07.129 D/AndroidRuntime( 6189): Shutting down VM
+11-06 19:45:07.318 D/AndroidRuntime( 6201): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:07.363 D/AndroidRuntime( 6201): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:45:08.390 D/AndroidRuntime( 6201): Shutting down VM
+11-06 19:45:08.580 D/AndroidRuntime( 6213): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:08.619 D/AndroidRuntime( 6213): Calling main entry com.android.commands.input.Input
+11-06 19:45:08.624 D/AndroidRuntime( 6213): Shutting down VM
+11-06 19:45:12.997 D/AndroidRuntime( 6229): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:13.038 D/AndroidRuntime( 6229): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:45:14.066 D/AndroidRuntime( 6229): Shutting down VM
+11-06 19:45:14.250 D/AndroidRuntime( 6242): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:14.297 D/AndroidRuntime( 6242): Calling main entry com.android.commands.input.Input
+11-06 19:45:14.303 D/AndroidRuntime( 6242): Shutting down VM
+11-06 19:45:17.694 D/AndroidRuntime( 6257): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:17.736 D/AndroidRuntime( 6257): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:45:18.755 D/AndroidRuntime( 6257): Shutting down VM
+11-06 19:45:18.940 D/AndroidRuntime( 6269): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:18.981 D/AndroidRuntime( 6269): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:45:19.996 D/AndroidRuntime( 6269): Shutting down VM
+11-06 19:45:20.181 D/AndroidRuntime( 6281): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:20.218 D/AndroidRuntime( 6281): Calling main entry com.android.commands.input.Input
+11-06 19:45:20.221 D/AndroidRuntime( 6281): Shutting down VM
+11-06 19:45:20.425 I/chatty  ( 5072): uid=10077(u0_a77) com.alexandro.leitorpdf identical 1 line
+11-06 19:45:21.347 D/AndroidRuntime( 6291): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:21.389 D/AndroidRuntime( 6291): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:45:22.414 D/AndroidRuntime( 6291): Shutting down VM
+11-06 19:45:22.606 D/AndroidRuntime( 6309): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:22.644 D/AndroidRuntime( 6309): Calling main entry com.android.commands.input.Input
+11-06 19:45:22.648 D/AndroidRuntime( 6309): Shutting down VM
+11-06 19:45:23.767 D/AndroidRuntime( 6319): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:23.803 D/AndroidRuntime( 6319): Calling main entry com.android.commands.input.Input
+11-06 19:45:23.957 D/AndroidRuntime( 6319): Shutting down VM
+11-06 19:45:27.362 D/AndroidRuntime( 6334): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:27.405 D/AndroidRuntime( 6334): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:45:28.423 D/AndroidRuntime( 6334): Shutting down VM
+11-06 19:45:28.606 D/AndroidRuntime( 6346): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:28.647 D/AndroidRuntime( 6346): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:45:29.665 D/AndroidRuntime( 6346): Shutting down VM
+11-06 19:45:29.846 D/AndroidRuntime( 6358): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:29.883 D/AndroidRuntime( 6358): Calling main entry com.android.commands.input.Input
+11-06 19:45:29.888 D/AndroidRuntime( 6358): Shutting down VM
+11-06 19:45:31.011 D/AndroidRuntime( 6368): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:31.053 D/AndroidRuntime( 6368): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:45:32.075 D/AndroidRuntime( 6368): Shutting down VM
+11-06 19:45:32.266 D/AndroidRuntime( 6381): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:32.307 D/AndroidRuntime( 6381): Calling main entry com.android.commands.input.Input
+11-06 19:45:32.315 D/AndroidRuntime( 6381): Shutting down VM
+11-06 19:45:33.447 D/AndroidRuntime( 6392): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:33.490 D/AndroidRuntime( 6392): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:45:34.510 D/AndroidRuntime( 6392): Shutting down VM
+11-06 19:45:34.700 D/AndroidRuntime( 6404): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:34.745 D/AndroidRuntime( 6404): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:45:35.762 D/AndroidRuntime( 6404): Shutting down VM
+11-06 19:45:35.947 D/AndroidRuntime( 6417): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:35.983 D/AndroidRuntime( 6417): Calling main entry com.android.commands.input.Input
+11-06 19:45:35.987 D/AndroidRuntime( 6417): Shutting down VM
+11-06 19:45:36.186 I/chatty  ( 5072): uid=10077(u0_a77) com.alexandro.leitorpdf identical 1 line
+11-06 19:45:37.121 D/AndroidRuntime( 6427): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:37.164 D/AndroidRuntime( 6427): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:45:38.184 D/AndroidRuntime( 6427): Shutting down VM
+11-06 19:45:38.339 D/AndroidRuntime( 6442): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:38.378 D/AndroidRuntime( 6442): Calling main entry com.android.commands.input.Input
+11-06 19:45:38.386 D/AndroidRuntime( 6442): Shutting down VM
+11-06 19:45:39.527 D/AndroidRuntime( 6452): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:39.568 D/AndroidRuntime( 6452): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:45:40.584 D/AndroidRuntime( 6452): Shutting down VM
+11-06 19:45:40.774 D/AndroidRuntime( 6465): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:40.816 D/AndroidRuntime( 6465): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:45:41.834 D/AndroidRuntime( 6465): Shutting down VM
+11-06 19:45:42.014 D/AndroidRuntime( 6477): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:42.049 D/AndroidRuntime( 6477): Calling main entry com.android.commands.input.Input
+11-06 19:45:42.052 D/AndroidRuntime( 6477): Shutting down VM
+11-06 19:45:43.183 D/AndroidRuntime( 6488): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:43.225 D/AndroidRuntime( 6488): Calling main entry com.android.commands.uiautomator.Launcher
+11-06 19:45:44.248 D/AndroidRuntime( 6488): Shutting down VM
+11-06 19:45:44.398 D/AndroidRuntime( 6501): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:44.434 D/AndroidRuntime( 6501): Calling main entry com.android.commands.input.Input
+11-06 19:45:44.441 D/AndroidRuntime( 6501): Shutting down VM
+11-06 19:45:45.568 D/AndroidRuntime( 6511): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:45.605 D/AndroidRuntime( 6511): Calling main entry com.android.commands.input.Input
+11-06 19:45:45.613 D/AndroidRuntime( 6511): Shutting down VM
+11-06 19:45:45.640 I/ActivityManager( 1663): Force stopping com.alexandro.leitorpdf appid=10077 user=0: from pid 6524
+11-06 19:45:45.640 I/ActivityManager( 1663): Killing 5072:com.alexandro.leitorpdf/u0a77 (adj 100): stop com.alexandro.leitorpdf
+11-06 19:45:45.645 I/ActivityManager( 1663):   Force finishing activity ActivityRecord{2a5d034 u0 com.alexandro.leitorpdf/.MainActivity t8}
+11-06 19:45:45.657 I/ActivityManager( 1663):   Force finishing activity ActivityRecord{2a5d034 u0 com.alexandro.leitorpdf/.MainActivity t8 f}
+11-06 19:45:45.657 W/ActivityManager( 1663): Duplicate finish request for ActivityRecord{2a5d034 u0 com.alexandro.leitorpdf/.MainActivity t8 f}
+11-06 19:45:45.682 W/InputDispatcher( 1663): channel '2ef462c com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity (server)' ~ Consumer closed input channel or an error occurred.  events=0x9
+11-06 19:45:45.682 E/InputDispatcher( 1663): channel '2ef462c com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity (server)' ~ Channel is unrecoverably broken and will be disposed!
+11-06 19:45:45.682 W/InputDispatcher( 1663): channel 'aa02a9a com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity (server)' ~ Consumer closed input channel or an error occurred.  events=0x9
+11-06 19:45:45.682 E/InputDispatcher( 1663): channel 'aa02a9a com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity (server)' ~ Channel is unrecoverably broken and will be disposed!
+11-06 19:45:45.682 I/WindowManager( 1663): WIN DEATH: Window{2ef462c u0 com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity}
+11-06 19:45:45.682 W/InputDispatcher( 1663): Attempted to unregister already unregistered input channel '2ef462c com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity (server)'
+11-06 19:45:45.683 I/WindowManager( 1663): WIN DEATH: Window{aa02a9a u0 com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity}
+11-06 19:45:45.683 W/InputDispatcher( 1663): Attempted to unregister already unregistered input channel 'aa02a9a com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity (server)'
+11-06 19:45:45.714 I/ActivityManager( 1663): START u0 {act=android.intent.action.VIEW dat=file:///data/data/com.alexandro.leitorpdf/files/exemplo_senha.pdf typ=application/pdf flg=0x10000000 cmp=com.alexandro.leitorpdf/.MainActivity} from uid 2000
+11-06 19:45:45.748 I/ActivityManager( 1663): Start proc 6530:com.alexandro.leitorpdf/u0a77 for activity com.alexandro.leitorpdf/.MainActivity
+11-06 19:45:46.065 D/SurfaceFlinger( 1399): duplicate layer name: changing com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity to com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity#1
+11-06 19:45:46.661 I/ActivityManager( 1663): Displayed com.alexandro.leitorpdf/.MainActivity: +922ms
+11-06 19:45:50.963 D/AndroidRuntime( 6559): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:51.000 D/AndroidRuntime( 6559): Calling main entry com.android.commands.input.Input
+11-06 19:45:51.010 D/AndroidRuntime( 6559): Shutting down VM
+11-06 19:45:51.140 D/AndroidRuntime( 6569): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:51.174 D/AndroidRuntime( 6569): Calling main entry com.android.commands.input.Input
+11-06 19:45:51.179 D/AndroidRuntime( 6569): Shutting down VM
+11-06 19:45:51.287 E/SurfaceFlinger( 1399): Failed to find layer (com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity#1) in layer parent (no-parent).
+11-06 19:45:55.713 D/AndroidRuntime( 6603): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:55.748 D/AndroidRuntime( 6603): Calling main entry com.android.commands.input.Input
+11-06 19:45:55.777 D/AndroidRuntime( 6603): Shutting down VM
+11-06 19:45:56.148 D/AndroidRuntime( 6619): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-06 19:45:56.209 D/AndroidRuntime( 6619): Calling main entry com.android.commands.input.Input
+11-06 19:45:56.372 D/AndroidRuntime( 6619): Shutting down VM
+11-06 19:45:56.556 E/System  ( 6530): 	at android.graphics.pdf.PdfRenderer.nativeClose(Native Method)
+11-06 19:45:56.556 E/System  ( 6530): 	at android.graphics.pdf.PdfRenderer.doClose(PdfRenderer.java:247)
+11-06 19:45:56.556 E/System  ( 6530): 	at android.graphics.pdf.PdfRenderer.finalize(PdfRenderer.java:235)
+11-06 19:46:02.803 I/ActivityManager( 1663): Force stopping com.alexandro.leitorpdf appid=10077 user=0: from pid 6668
+11-06 19:46:02.803 I/ActivityManager( 1663): Killing 6530:com.alexandro.leitorpdf/u0a77 (adj 900): stop com.alexandro.leitorpdf
+11-06 19:46:02.826 I/ActivityManager( 1663): START u0 {flg=0x10000000 cmp=com.alexandro.leitorpdf/.MainActivity} from uid 2000
+11-06 19:46:02.843 I/ActivityManager( 1663): Start proc 6674:com.alexandro.leitorpdf/u0a77 for activity com.alexandro.leitorpdf/.MainActivity
+11-06 19:46:03.572 I/ActivityManager( 1663): Displayed com.alexandro.leitorpdf/.MainActivity: +703ms
+11-06 19:46:06.775 I/ActivityManager( 1663): START u0 {act=android.intent.action.VIEW dat=file:///data/data/com.alexandro.leitorpdf/files/exemplo.pdf typ=application/pdf flg=0x10000000 cmp=com.alexandro.leitorpdf/.MainActivity} from uid 2000
+11-06 19:46:06.827 D/SurfaceFlinger( 1399): duplicate layer name: changing com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity to com.alexandro.leitorpdf/com.alexandro.leitorpdf.MainActivity#1
+11-06 19:46:07.001 I/ActivityManager( 1663): Displayed com.alexandro.leitorpdf/.MainActivity: +221ms

@@ -1,0 +1,143 @@
+--------- beginning of main
+--------- beginning of system
+11-06 19:42:16.693 D/LeitorPDF( 4304): motor básico, 12 páginas
+11-06 19:42:17.104 D/LeitorPDF( 4304): layout 1080x2400 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:42:17.129 D/LeitorPDF( 4304): pedido p1 1048x1483
+11-06 19:42:17.129 D/LeitorPDF( 4304): pedido p2 1048x1483
+11-06 19:42:17.129 D/LeitorPDF( 4304): pedido p3 1048x1483
+11-06 19:42:17.149 D/LeitorPDF( 4304): p1 pronta em 18 ms
+11-06 19:42:17.205 D/LeitorPDF( 4304): p2 pronta em 46 ms
+11-06 19:42:17.259 D/LeitorPDF( 4304): p3 pronta em 54 ms
+11-06 19:42:21.896 D/LeitorPDF( 4304): pedido p4 1048x1483
+11-06 19:42:21.920 D/LeitorPDF( 4304): p4 pronta em 25 ms
+11-06 19:42:42.106 D/LeitorPDF( 4304): pedido p8 1048x1483
+11-06 19:42:42.106 D/LeitorPDF( 4304): pedido p9 1048x1483
+11-06 19:42:42.106 D/LeitorPDF( 4304): pedido p10 1048x1483
+11-06 19:42:42.106 D/LeitorPDF( 4304): pedido p11 1048x740
+11-06 19:42:42.106 D/LeitorPDF( 4304): pedido p7 1048x1483
+11-06 19:42:42.122 D/LeitorPDF( 4304): p8 pronta em 15 ms
+11-06 19:42:42.189 D/LeitorPDF( 4304): p9 pronta em 67 ms
+11-06 19:42:42.203 D/LeitorPDF( 4304): p10 pronta em 14 ms
+11-06 19:42:42.216 D/LeitorPDF( 4304): p11 pronta em 13 ms
+11-06 19:42:42.230 D/LeitorPDF( 4304): p7 pronta em 14 ms
+11-06 19:42:45.663 D/LeitorPDF( 4304): layout 1080x2400 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:42:45.668 D/LeitorPDF( 4304): layout 2400x1080 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:42:45.736 D/LeitorPDF( 4304): pedido p8 2177x3081
+11-06 19:42:45.736 D/LeitorPDF( 4304): pedido p9 2177x3081
+11-06 19:42:45.737 D/LeitorPDF( 4304): pedido p10 2177x3081
+11-06 19:42:45.737 D/LeitorPDF( 4304): pedido p7 2177x3081
+11-06 19:42:45.803 D/LeitorPDF( 4304): p8 pronta em 64 ms
+11-06 19:42:45.848 D/LeitorPDF( 4304): p9 pronta em 45 ms
+11-06 19:42:45.886 D/LeitorPDF( 4304): p10 pronta em 39 ms
+11-06 19:42:45.950 D/LeitorPDF( 4304): p7 pronta em 63 ms
+11-06 19:42:50.897 D/LeitorPDF( 4304): layout 2400x1080 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:42:50.900 D/LeitorPDF( 4304): layout 1080x2400 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:42:50.933 D/LeitorPDF( 4304): pedido p8 1048x1483
+11-06 19:42:50.933 D/LeitorPDF( 4304): pedido p9 1048x1483
+11-06 19:42:50.933 D/LeitorPDF( 4304): pedido p10 1048x1483
+11-06 19:42:50.933 D/LeitorPDF( 4304): pedido p11 1048x740
+11-06 19:42:50.933 D/LeitorPDF( 4304): pedido p7 1048x1483
+11-06 19:42:50.944 D/LeitorPDF( 4304): p8 pronta em 8 ms
+11-06 19:42:50.962 D/LeitorPDF( 4304): p9 pronta em 18 ms
+11-06 19:42:50.979 D/LeitorPDF( 4304): p10 pronta em 17 ms
+11-06 19:42:50.993 D/LeitorPDF( 4304): p11 pronta em 14 ms
+11-06 19:42:51.002 D/LeitorPDF( 4304): p7 pronta em 8 ms
+11-06 19:42:58.926 D/LeitorPDF( 5072): motor básico, 12 páginas
+11-06 19:42:58.989 D/LeitorPDF( 5072): layout 1080x2400 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:42:59.043 D/LeitorPDF( 5072): pedido p8 1048x1483
+11-06 19:42:59.043 D/LeitorPDF( 5072): pedido p9 1048x1483
+11-06 19:42:59.043 D/LeitorPDF( 5072): pedido p10 1048x1483
+11-06 19:42:59.043 D/LeitorPDF( 5072): pedido p11 1048x740
+11-06 19:42:59.043 D/LeitorPDF( 5072): pedido p7 1048x1483
+11-06 19:42:59.055 D/LeitorPDF( 5072): p8 pronta em 10 ms
+11-06 19:42:59.077 D/LeitorPDF( 5072): p9 pronta em 21 ms
+11-06 19:42:59.090 D/LeitorPDF( 5072): p10 pronta em 14 ms
+11-06 19:42:59.100 D/LeitorPDF( 5072): p11 pronta em 10 ms
+11-06 19:42:59.109 D/LeitorPDF( 5072): p7 pronta em 8 ms
+11-06 19:43:19.509 D/LeitorPDF( 5072): motor básico, 12 páginas
+11-06 19:43:19.605 D/LeitorPDF( 5072): layout 1080x2400 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:43:19.643 D/LeitorPDF( 5072): pedido p8 1048x1483
+11-06 19:43:19.643 D/LeitorPDF( 5072): pedido p9 1048x1483
+11-06 19:43:19.643 D/LeitorPDF( 5072): pedido p10 1048x1483
+11-06 19:43:19.643 D/LeitorPDF( 5072): pedido p11 1048x740
+11-06 19:43:19.643 D/LeitorPDF( 5072): pedido p7 1048x1483
+11-06 19:43:19.663 D/LeitorPDF( 5072): p8 pronta em 20 ms
+11-06 19:43:19.677 D/LeitorPDF( 5072): p9 pronta em 14 ms
+11-06 19:43:19.686 D/LeitorPDF( 5072): p10 pronta em 8 ms
+11-06 19:43:19.693 D/LeitorPDF( 5072): p11 pronta em 7 ms
+11-06 19:43:19.704 D/LeitorPDF( 5072): p7 pronta em 11 ms
+11-06 19:43:27.807 D/LeitorPDF( 5072): pedido p1 1048x1483
+11-06 19:43:27.807 D/LeitorPDF( 5072): pedido p2 1048x1483
+11-06 19:43:27.807 D/LeitorPDF( 5072): pedido p3 1048x1483
+11-06 19:43:27.821 D/LeitorPDF( 5072): p1 pronta em 10 ms
+11-06 19:43:27.893 D/LeitorPDF( 5072): p2 pronta em 71 ms
+11-06 19:43:27.907 D/LeitorPDF( 5072): p3 pronta em 13 ms
+11-06 19:44:02.664 D/LeitorPDF( 5072): motor básico, 12 páginas
+11-06 19:44:02.732 D/LeitorPDF( 5072): layout 1080x2400 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:44:02.738 D/LeitorPDF( 5072): pedido p1 1048x1483
+11-06 19:44:02.738 D/LeitorPDF( 5072): pedido p2 1048x1483
+11-06 19:44:02.739 D/LeitorPDF( 5072): pedido p3 1048x1483
+11-06 19:44:02.757 D/LeitorPDF( 5072): p1 pronta em 18 ms
+11-06 19:44:02.770 D/LeitorPDF( 5072): p2 pronta em 12 ms
+11-06 19:44:02.801 D/LeitorPDF( 5072): p3 pronta em 29 ms
+11-06 19:44:12.105 D/LeitorPDF( 5072): pedido p4 1048x1483
+11-06 19:44:12.122 D/LeitorPDF( 5072): p4 pronta em 13 ms
+11-06 19:44:26.753 D/LeitorPDF( 5072): margens: 0.03625 0.090619475 0.9575 0.9757522
+11-06 19:44:26.754 D/LeitorPDF( 5072): layout 1080x2400 contínuo corte 0.03625,0.090619475,0.9575,0.9757522
+11-06 19:44:26.769 D/LeitorPDF( 5072): pedido p1 1048x1425
+11-06 19:44:26.771 D/LeitorPDF( 5072): pedido p2 1048x1425
+11-06 19:44:26.771 D/LeitorPDF( 5072): pedido p3 1048x1425
+11-06 19:44:26.771 D/LeitorPDF( 5072): pedido p4 1048x1425
+11-06 19:44:26.790 D/LeitorPDF( 5072): p1 pronta em 19 ms
+11-06 19:44:26.803 D/LeitorPDF( 5072): p2 pronta em 13 ms
+11-06 19:44:26.816 D/LeitorPDF( 5072): p3 pronta em 12 ms
+11-06 19:44:26.827 D/LeitorPDF( 5072): p4 pronta em 12 ms
+11-06 19:44:36.046 D/LeitorPDF( 5072): layout 1080x2400 página corte 0.03625,0.090619475,0.9575,0.9757522
+11-06 19:44:36.053 D/LeitorPDF( 5072): pedido p2 1048x1425
+11-06 19:44:36.053 D/LeitorPDF( 5072): pedido p3 1048x1425
+11-06 19:44:36.053 D/LeitorPDF( 5072): pedido p1 1048x1425
+11-06 19:44:36.063 D/LeitorPDF( 5072): p2 pronta em 9 ms
+11-06 19:44:36.091 D/LeitorPDF( 5072): p3 pronta em 27 ms
+11-06 19:44:36.102 D/LeitorPDF( 5072): p1 pronta em 10 ms
+11-06 19:44:40.413 D/LeitorPDF( 5072): pedido p4 1048x1425
+11-06 19:44:40.420 D/LeitorPDF( 5072): p4 pronta em 6 ms
+11-06 19:45:23.959 D/LeitorPDF( 5072): pedido p5 1048x1425
+11-06 19:45:23.975 D/LeitorPDF( 5072): p5 pronta em 15 ms
+11-06 19:45:32.378 D/LeitorPDF( 5072): layout 1080x2400 contínuo corte 0.03625,0.090619475,0.9575,0.9757522
+11-06 19:45:32.390 D/LeitorPDF( 5072): pedido p3 1048x1425
+11-06 19:45:32.390 D/LeitorPDF( 5072): pedido p4 1048x1425
+11-06 19:45:32.390 D/LeitorPDF( 5072): pedido p5 1048x1425
+11-06 19:45:32.390 D/LeitorPDF( 5072): pedido p6 1048x1425
+11-06 19:45:32.390 D/LeitorPDF( 5072): pedido p2 1048x1425
+11-06 19:45:32.404 D/LeitorPDF( 5072): p3 pronta em 13 ms
+11-06 19:45:32.418 D/LeitorPDF( 5072): p4 pronta em 13 ms
+11-06 19:45:32.432 D/LeitorPDF( 5072): p5 pronta em 14 ms
+11-06 19:45:32.440 D/LeitorPDF( 5072): p6 pronta em 8 ms
+11-06 19:45:32.451 D/LeitorPDF( 5072): p2 pronta em 10 ms
+11-06 19:45:38.451 D/LeitorPDF( 5072): layout 1080x2400 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:45:38.462 D/LeitorPDF( 5072): pedido p3 1048x1483
+11-06 19:45:38.462 D/LeitorPDF( 5072): pedido p4 1048x1483
+11-06 19:45:38.462 D/LeitorPDF( 5072): pedido p5 1048x1483
+11-06 19:45:38.462 D/LeitorPDF( 5072): pedido p6 1048x1483
+11-06 19:45:38.462 D/LeitorPDF( 5072): pedido p2 1048x1483
+11-06 19:45:38.478 D/LeitorPDF( 5072): p3 pronta em 15 ms
+11-06 19:45:38.496 D/LeitorPDF( 5072): p4 pronta em 18 ms
+11-06 19:45:38.505 D/LeitorPDF( 5072): p5 pronta em 9 ms
+11-06 19:45:38.532 D/LeitorPDF( 5072): p6 pronta em 26 ms
+11-06 19:45:38.542 D/LeitorPDF( 5072): p2 pronta em 10 ms
+11-06 19:46:06.826 D/LeitorPDF( 6674): motor básico, 12 páginas
+11-06 19:46:07.000 D/LeitorPDF( 6674): layout 1080x2400 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:46:07.008 D/LeitorPDF( 6674): pedido p1 1048x1483
+11-06 19:46:07.008 D/LeitorPDF( 6674): pedido p2 1048x1483
+11-06 19:46:07.008 D/LeitorPDF( 6674): pedido p3 1048x1483
+11-06 19:46:07.027 D/LeitorPDF( 6674): p1 pronta em 17 ms
+11-06 19:46:07.044 D/LeitorPDF( 6674): p2 pronta em 16 ms
+11-06 19:46:07.052 D/LeitorPDF( 6674): p3 pronta em 8 ms
+11-06 19:46:11.332 D/LeitorPDF( 6674): motor básico, 12 páginas
+11-06 19:46:11.440 D/LeitorPDF( 6674): layout 1080x2400 contínuo corte 0.0,0.0,1.0,1.0
+11-06 19:46:11.452 D/LeitorPDF( 6674): pedido p1 1048x1483
+11-06 19:46:11.453 D/LeitorPDF( 6674): pedido p2 1048x1483
+11-06 19:46:11.453 D/LeitorPDF( 6674): pedido p3 1048x1483
+11-06 19:46:11.484 D/LeitorPDF( 6674): p1 pronta em 29 ms
+11-06 19:46:11.494 D/LeitorPDF( 6674): p2 pronta em 10 ms
+11-06 19:46:11.527 D/LeitorPDF( 6674): p3 pronta em 34 ms
